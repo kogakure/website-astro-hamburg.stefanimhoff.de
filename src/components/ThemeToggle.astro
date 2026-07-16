@@ -22,6 +22,8 @@
 		} catch {
 			// The visual preference still applies for the current page.
 		}
+
+		document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
 	};
 
 	const updateToggle = (button: HTMLButtonElement) => {
@@ -32,11 +34,16 @@
 		button.setAttribute('aria-pressed', String(isDark));
 	};
 
+	const updateToggles = () => {
+		document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(updateToggle);
+	};
+
+	document.addEventListener('themechange', updateToggles);
+	updateToggles();
+
 	document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
-		updateToggle(button);
 		button.addEventListener('click', () => {
 			setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
-			updateToggle(button);
 		});
 	});
 </script>

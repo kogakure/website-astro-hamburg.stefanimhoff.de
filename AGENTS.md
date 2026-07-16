@@ -1,55 +1,54 @@
 # AGENTS.md
 
-This file provides guidance to agentic agents when working with code in this repository.
+This file provides guidance to agents working in this repository.
 
 ## Commands
 
 ```sh
-pnpm install          # install dependencies
-pnpm start            # dev server (clean + watch assets + eleventy --serve)
-pnpm run build        # production build (clean → assets → eleventy → workbox SW)
-pnpm run build:assets # gulp build only (JS + CSS production + critical CSS)
-pnpm run svg          # regenerate SVG sprite from src/icons/*.svg → src/includes/icons.svg
-pnpm run plop         # scaffold new district page interactively
+pnpm install --frozen-lockfile # install the locked dependency graph
+pnpm start                    # Astro development server
+pnpm run build                # production static build into dist/
+pnpm run preview              # serve the production build locally
+pnpm run check                # Astro and TypeScript checks
+pnpm run lint                 # ESLint, including Astro and Prettier rules
+pnpm run format:check         # verify formatting without rewriting files
+pnpm test                     # Vitest unit and content-parity tests
+pnpm run test:e2e             # Playwright against the production preview
 ```
 
-No test suite exists in this project.
-
-Linting:
+Playwright needs Chromium installed once:
 
 ```sh
-pnpm exec eslint src/assets/scripts
-pnpm exec stylelint src/assets/styles
+pnpm exec playwright install chromium
 ```
 
 ## Architecture
 
-**Stack**: Eleventy 1.x (SSG) + Gulp 4 (asset pipeline) + PostCSS + Browserify/Babel + Workbox (SW).
+**Stack**: Astro 7 static output, TypeScript, MDX content collections, Tailwind CSS 4,
+Vitest, Playwright, an Astro-generated web manifest, sitemap, and service worker.
 
-**Build flow**:
+- `astro.config.mjs` configures static directory output, trailing slashes, MDX,
+  sitemap filtering, the manifest, Tailwind, and Workbox-backed offline behavior.
+- `src/content.config.ts` defines the typed `districts` collection.
+- District content lives in `src/content/districts/*.mdx`; preserve authored prose,
+  media order, public asset URLs, anchor IDs, and embed IDs.
+- `src/pages/[slug].astro` generates the 20 district routes. Other pages and
+  machine-readable endpoints live in `src/pages/`.
+- `src/layouts/BaseLayout.astro` owns metadata and the shared document shell.
+  Reusable UI is in `src/components/`, shared behavior in `src/lib/`, and site
+  metadata in `src/data/site.ts`.
+- `src/styles/global.css` contains global design tokens and base styles. Component
+  and page styles remain scoped in their Astro files.
+- Passthrough fonts, images, favicons, and verification files live in `public/`.
 
-1. Gulp compiles `src/assets/scripts/main.js` → `dist/assets/scripts/` (Browserify + Babel)
-2. Gulp compiles `src/assets/styles/*.css` → `dist/assets/styles/` (PostCSS)
-3. Critical CSS (`src/assets/styles/critical/*.css`) → `src/includes/critical/` (inlined at build time)
-4. Eleventy processes `src/` → `dist/` (Nunjucks + Markdown)
-5. Workbox generates service worker into `dist/`
+## Quality and deployment
 
-**Eleventy config** (`.eleventy.js`):
-
-- Input: `src/`, output: `dist/`
-- Template engines: Nunjucks (`.njk`) and Markdown (`.md`), plus `11ty.js`
-- `src/data/` → global data; `src/includes/` → partials; `src/layouts/` → base layouts
-- `lazyimages` plugin active only in production (`ELEVENTY_ENV=production`)
-- HTML minification active only in production
-
-**Content**: District pages live in `src/districts/` as Markdown files. Each uses the `district` layout. New districts are scaffolded via `pnpm run plop` (template in `plop/`).
-
-**Layouts** (`src/layouts/`): `base.njk` → `default.njk` / `district.njk` / `narrow.njk`.
-
-**Custom filters** (`src/utils/filters.js`): `dateToFormat`, `dateToISO`, `sortByTitle`.
-
-**Shortcodes** (`src/utils/shortcodes.js`): `{% email %}`, `{% map mid %}`, `{% youtube id %}`.
-
-**SVG sprite**: Source icons in `src/icons/`, compiled to `src/includes/icons.svg` by `pnpm run svg`. Referenced inline via `<use xlink:href="#icon-name">`.
-
-**Static assets** copied verbatim to `dist/`: `src/static/` (xml/html/ico), `src/assets/fonts/`, `src/assets/images/`, `src/downloads/`.
+- Unit tests are colocated as `src/**/*.test.ts`; content parity is asserted in
+  `src/test/content-parity.test.ts`.
+- Browser coverage lives in `tests/e2e/` and runs against `pnpm preview`, so run
+  `pnpm build` first when invoking Playwright outside its configured web server.
+- Production deployment uses the multistage `Dockerfile` and `nginx.conf`.
+  Nginx owns the custom 404 response, security headers, service-worker cache policy,
+  and the legacy `/sitemap.xml` redirect.
+- Keep `docs/11ty-inventory.md` as the historical migration parity record; it is
+  not active build documentation.

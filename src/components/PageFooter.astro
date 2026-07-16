@@ -24,7 +24,7 @@ import { site } from '@/data/site.ts';
 		padding: 2rem var(--page-gutter) 3rem;
 		border-top: 1px solid var(--color-rule);
 		color: var(--color-muted);
-		font-size: 0.9rem;
+		font-size: var(--text-secondary);
 	}
 
 	.site-footer p {
@@ -39,9 +39,16 @@ import { site } from '@/data/site.ts';
 	.footer-meta {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		justify-content: flex-end;
 		gap: 0.5rem 1.5rem;
 		text-align: right;
+	}
+
+	.footer-meta a {
+		display: inline-flex;
+		min-height: 2.75rem;
+		align-items: center;
 	}
 
 	@media (max-width: 35rem) {

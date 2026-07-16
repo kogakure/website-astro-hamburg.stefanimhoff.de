@@ -32,10 +32,13 @@
 	--color-tide-hover: oklch(30% 0.095 235);
 	--color-buoy: oklch(47% 0.16 30);
 	--color-photo-frame: oklch(17% 0.025 240);
-	--font-body: 'Secuela', ui-serif, Georgia, serif;
+	--font-body: 'Secuela', 'Arial Narrow', 'Aptos Narrow', 'Roboto Condensed', sans-serif;
+	--text-caption: 0.8rem;
+	--text-meta: 0.875rem;
+	--text-secondary: 0.9rem;
 	--page-gutter: clamp(1.125rem, 4vw, 3rem);
 	--shell-width: 92rem;
-	--reading-width: 70ch;
+	--reading-width: 60ch;
 	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 	font-family: var(--font-body);
 	font-synthesis: none;
@@ -75,7 +78,6 @@ body {
 	background: var(--color-canvas);
 	color: var(--color-ink);
 	font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
-	font-variation-settings: 'wght' 400;
 	line-height: 1.65;
 	text-rendering: optimizeLegibility;
 }
@@ -89,7 +91,6 @@ h2,
 h3 {
 	margin-block: 0;
 	font-weight: 650;
-	font-variation-settings: 'wght' 650;
 	line-height: 1.02;
 	letter-spacing: -0.025em;
 	text-wrap: balance;

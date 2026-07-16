@@ -19,7 +19,9 @@
 		"preview": "astro preview",
 		"start": "astro dev",
 		"test": "vitest run",
+		"test:build": "node scripts/verify-built-images.mjs",
 		"test:coverage": "vitest run --coverage",
+		"test:docker": "./scripts/docker-smoke.sh",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"test:watch": "vitest"
@@ -44,25 +46,24 @@
 		"astro": "^7.0.0",
 		"astro-webmanifest": "^1.0.0",
 		"astrojs-service-worker": "^2.0.0",
+		"image-size": "^2.0.2",
 		"tailwindcss": "^4.3.0"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.11.1",
 		"@eslint/js": "^9.39.2",
 		"@playwright/test": "^1.60.0",
 		"@typescript-eslint/parser": "^8.53.1",
 		"@vitest/coverage-v8": "^4.0.18",
-		"axe-core": "^4.11.4",
 		"eslint": "^9.39.2",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-astro": "^1.5.0",
 		"eslint-plugin-prettier": "^5.5.5",
 		"globals": "^17.5.0",
-		"happy-dom": "^20.5.0",
 		"prettier": "^3.8.2",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"typescript": "^5.9.3",
-		"vitest": "^4.0.18",
-		"vitest-axe": "^0.1.0"
+		"vitest": "^4.0.18"
 	}
 }

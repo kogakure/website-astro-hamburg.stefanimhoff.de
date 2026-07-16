@@ -114,6 +114,10 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		<article class="district-content">
 			<Content components={contentComponents} />
 		</article>
+		<nav class="gallery-recovery" aria-label="Walk page shortcuts">
+			<a href="#main">Back to walk summary <span aria-hidden="true">↑</span></a>
+			<a href="/">Return to district atlas</a>
+		</nav>
 		<DistrictNavigation {previous} {next} />
 	</main>
 </BaseLayout>
@@ -128,7 +132,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	.breadcrumbs {
 		margin-bottom: clamp(1.5rem, 4vw, 3rem);
 		color: var(--color-muted);
-		font-size: 0.85rem;
+		font-size: var(--text-meta);
 	}
 
 	.breadcrumbs a {
@@ -158,9 +162,26 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	}
 
 	.district-content,
+	.gallery-recovery,
 	:global(.district-navigation) {
 		max-width: var(--reading-width);
 		margin-inline: auto;
+	}
+
+	.gallery-recovery {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem 2rem;
+		margin-top: clamp(4rem, 8vw, 7rem);
+		padding-block: 1rem;
+		border-block: 1px solid var(--color-rule);
+	}
+
+	.gallery-recovery a {
+		display: inline-flex;
+		min-height: 2.75rem;
+		align-items: center;
 	}
 
 	.district-title {
@@ -174,7 +195,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	.walk-position {
 		margin: 0;
 		color: var(--color-buoy);
-		font-size: 0.82rem;
+		font-size: var(--text-meta);
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -196,7 +217,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		gap: 1rem;
 		padding-block: 0.55rem;
 		border-bottom: 1px solid var(--color-rule);
-		font-size: 0.82rem;
+		font-size: var(--text-meta);
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -213,6 +234,11 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		margin-top: clamp(4rem, 9vw, 8rem);
 		font-size: clamp(1.05rem, 1.2vw, 1.18rem);
 		line-height: 1.75;
+	}
+
+	:global([data-theme='dark']) .district-content {
+		letter-spacing: 0.01em;
+		line-height: 1.8;
 	}
 
 	.district-content :global(p) {
@@ -260,7 +286,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	.district-content :global(figcaption) {
 		margin-top: 0.65rem;
 		color: var(--color-muted);
-		font-size: 0.85rem;
+		font-size: var(--text-meta);
 	}
 
 	.district-content :global(.footnotes) {
@@ -268,7 +294,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		padding-top: 1.5rem;
 		border-top: 1px solid var(--color-rule);
 		color: var(--color-muted);
-		font-size: 0.9rem;
+		font-size: var(--text-secondary);
 	}
 
 	.district-content :global(sup a) {
@@ -297,10 +323,6 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		.district-title {
 			min-height: 22rem;
 			padding: 1.5rem;
-		}
-
-		.route-log div {
-			font-size: 0.76rem;
 		}
 	}
 </style>

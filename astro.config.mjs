@@ -32,8 +32,8 @@ export default defineConfig({
 			],
 			start_url: '/',
 			display: 'standalone',
-			background_color: '#f2efe6',
-			theme_color: '#163344',
+			background_color: '#f3f7fa',
+			theme_color: '#030f18',
 		}),
 		serviceWorker({
 			registration: {
@@ -50,12 +50,12 @@ export default defineConfig({
 				runtimeCaching: [
 					{
 						urlPattern: /\.(?:avif|gif|jpe?g|png|svg|webp)$/,
-						handler: 'CacheFirst',
+						handler: 'StaleWhileRevalidate',
 						options: {
 							cacheName: 'images',
 							expiration: {
 								maxEntries: 100,
-								maxAgeSeconds: 60 * 60 * 24 * 30,
+								maxAgeSeconds: 60 * 60 * 24 * 7,
 							},
 						},
 					},

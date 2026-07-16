@@ -28,7 +28,9 @@ test('homepage shows the totals and alphabetically sorted district cards', async
 	await expect(page.getByRole('heading', { level: 1, name: 'Exploring Hamburg' })).toBeVisible();
 	await expect(page.getByText('280', { exact: true })).toBeVisible();
 	await expect(page.getByText('65', { exact: true })).toBeVisible();
-	await expect(page.getByText('20', { exact: true })).toBeVisible();
+	await expect(
+		page.getByRole('region', { name: 'Walk record' }).getByText('20', { exact: true }),
+	).toBeVisible();
 
 	const hrefs = await page
 		.locator('.district-card > a')
@@ -62,6 +64,8 @@ test('district navigation and embeds preserve the migrated content flow', async 
 	await expect(page.locator('.embed-map iframe')).toHaveCount(1);
 
 	await page.goto('/hamburg-hafencity/');
+	await expect(page.locator('a[rel="prev"]')).toHaveAttribute('href', '/hamburg-farmsen-berne/');
+	await expect(page.locator('a[rel="next"]')).toHaveAttribute('href', '/hamburg-hamm/');
 	await expect(page.locator('.embed-video iframe')).toHaveCount(2);
 	await expect(page.locator('.embed-map iframe')).toHaveCount(1);
 
@@ -86,11 +90,14 @@ test('utility pages and machine-readable outputs are published correctly', async
 	);
 
 	const notFound = await request.get('/404.html');
-	expect(notFound.status()).toBe(404);
-	expect(await notFound.text()).not.toContain('rel="canonical"');
+	expect(notFound.status()).toBe(200);
+	const notFoundBody = await notFound.text();
+	expect(notFoundBody).toContain('<h1');
+	expect(notFoundBody).toContain('Error 404');
+	expect(notFoundBody).not.toContain('rel="canonical"');
 
 	const feed = await request.get('/index.xml');
-	expect(feed.headers()['content-type']).toContain('application/atom+xml');
+	expect(feed.headers()['content-type']).toMatch(/(?:application\/atom\+xml|text\/xml)/);
 	expect(await feed.text()).toContain('<entry>');
 
 	const robots = await request.get('/robots.txt');

@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+import { contentLinkAttributes } from '@/lib/content-link.ts';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, rel, target, class: className, ...props } = Astro.props;
+const resolved = contentLinkAttributes({ href, rel, target, className });
+---
+
+<a {...props} href={href} target={resolved.target} rel={resolved.rel} class={resolved.className}
+	><slot /></a
+>

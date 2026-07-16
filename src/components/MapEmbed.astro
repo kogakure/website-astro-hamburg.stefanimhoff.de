@@ -1,0 +1,16 @@
+---
+export interface Props {
+	mid: string;
+	title?: string;
+}
+
+const { mid, title = 'Map of the district walk' } = Astro.props;
+const src = `https://www.google.com/maps/d/embed?mid=${encodeURIComponent(mid)}`;
+const fallback = `https://www.google.com/maps/d/viewer?mid=${encodeURIComponent(mid)}`;
+---
+
+<figure class="embed embed-map">
+	<iframe src={src} title={title} loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+	></iframe>
+	<figcaption><a href={fallback}>Open this route in Google Maps</a></figcaption>
+</figure>

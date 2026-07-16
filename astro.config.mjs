@@ -11,7 +11,9 @@ export default defineConfig({
 	trailingSlash: 'always',
 	integrations: [
 		mdx(),
-		sitemap(),
+		sitemap({
+			filter: (page) => !page.endsWith('/imprint/') && !page.endsWith('/404.html'),
+		}),
 		webmanifest({
 			name: 'Exploring Hamburg',
 			short_name: 'Exploring Hamburg',

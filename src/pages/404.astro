@@ -3,14 +3,21 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-	title="Page not found · Exploring Hamburg"
+	title="Error 404 · Exploring Hamburg"
 	description="The requested page could not be found."
 	robots="noindex,follow"
 >
 	<main id="main" class="mx-auto max-w-3xl px-6 py-24">
-		<h1 class="text-5xl font-semibold">Page not found</h1>
+		<h1 class="text-5xl font-semibold">Error 404</h1>
 		<p class="mt-6 text-xl">
-			The route ends here. <a class="underline" href="/">Return home</a>.
+			So’n Schiet<sup><a href="#schiet" aria-describedby="footnote-label">1</a></sup>. This
+			Page Can’t Be Found.
 		</p>
+		<p><a class="underline" href="/">Go back to the Homepage</a>.</p>
+		<footer id="schiet" class="mt-12 border-t pt-4">
+			<span id="footnote-label" class="sr-only">Footnote</span><p>
+				<sup>1</sup> “such a crap” (Hamburg Dialect)
+			</p>
+		</footer>
 	</main>
 </BaseLayout>

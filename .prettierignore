@@ -11,6 +11,7 @@ pnpm-lock.yaml
 postcss.config.js
 skills-lock.json
 src/assets
+src/content/districts
 src/districts
 src/includes
 src/layouts/*.njk

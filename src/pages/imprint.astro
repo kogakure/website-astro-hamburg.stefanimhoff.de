@@ -91,6 +91,16 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 		font-size: clamp(1rem, 1.2vw, 1.125rem);
 		line-height: 1.72;
 	}
+	:global([data-theme='dark']) .narrow-page {
+		letter-spacing: 0.01em;
+		line-height: 1.78;
+	}
+	.narrow-page :global(p a),
+	.narrow-page :global(li a) {
+		text-decoration-line: underline;
+		text-decoration-thickness: 0.08em;
+		text-underline-offset: 0.2em;
+	}
 	.legal-header {
 		margin-bottom: clamp(4rem, 9vw, 7rem);
 		padding-bottom: 1.5rem;
@@ -99,7 +109,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 	.legal-header p {
 		margin: 0 0 1rem;
 		color: var(--color-muted);
-		font-size: 0.85rem;
+		font-size: var(--text-meta);
 	}
 	h1 {
 		font-size: clamp(3.25rem, 8vw, 5.5rem);

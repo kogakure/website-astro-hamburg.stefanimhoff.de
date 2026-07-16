@@ -1,21 +1,31 @@
 <script is:inline>
 	(() => {
-		let storedTheme = null;
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-		try {
-			storedTheme = localStorage.getItem('theme');
-		} catch {
-			// Storage can be unavailable in privacy-focused browsing modes.
-		}
+		const readStoredTheme = () => {
+			let storedTheme = null;
 
-		const theme =
-			storedTheme === 'light' || storedTheme === 'dark'
-				? storedTheme
-				: window.matchMedia('(prefers-color-scheme: dark)').matches
-					? 'dark'
-					: 'light';
+			try {
+				storedTheme = localStorage.getItem('theme');
+			} catch {
+				// Storage can be unavailable in privacy-focused browsing modes.
+			}
 
-		document.documentElement.dataset.theme = theme;
-		document.documentElement.style.colorScheme = theme;
+			return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : null;
+		};
+
+		const applyTheme = (theme) => {
+			document.documentElement.dataset.theme = theme;
+			document.documentElement.style.colorScheme = theme;
+			document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
+		};
+
+		applyTheme(readStoredTheme() ?? (mediaQuery.matches ? 'dark' : 'light'));
+
+		const handleSystemThemeChange = (event) => {
+			if (readStoredTheme() === null) applyTheme(event.matches ? 'dark' : 'light');
+		};
+
+		mediaQuery.addEventListener('change', handleSystemThemeChange);
 	})();
 </script>

@@ -3,12 +3,13 @@
 
 # hamburg.stefanimhoff.de
 
-This the source of my [travel blog](https://hamburg.stefanimhoff.de/) build with [Eleventy](https://www.11ty.dev/), [PostCSS](https://postcss.org/), and [Gulp](https://gulpjs.com/).
+This is the source of my [walking journal](https://hamburg.stefanimhoff.de/), built
+with [Astro](https://astro.build/), MDX content collections, and Tailwind CSS.
 
 ## Installation
 
 ```sh
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 ## Running the Website
@@ -17,7 +18,16 @@ pnpm install
 pnpm start
 ```
 
-For more tasks have a look into the `package.json`.
+Quality checks:
+
+```sh
+pnpm check
+pnpm lint
+pnpm format:check
+pnpm test
+pnpm build
+pnpm test:e2e
+```
 
 ## Licence
 

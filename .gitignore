@@ -1,11 +1,13 @@
-# npm
+# Dependencies
 node_modules
 
-# 11ty
-dist
-src/includes/critical
-.lazyimages.json
-
-# Astro
+# Astro output
 .astro
+dist
+
+# Test output
+playwright-report
 test-results
+
+# Local Impeccable browser critiques
+.impeccable/critique/*.md

@@ -10,7 +10,15 @@ const fallback = `https://www.google.com/maps/d/viewer?mid=${encodeURIComponent(
 ---
 
 <figure class="embed embed-map">
-	<iframe src={src} title={title} loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+	<iframe src={src} title={title} loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
 	></iframe>
 	<figcaption><a href={fallback}>Open this route in Google Maps</a></figcaption>
 </figure>
+
+<style>
+	.embed-map figcaption a {
+		display: inline-flex;
+		min-height: 2.75rem;
+		align-items: center;
+	}
+</style>

@@ -1,11 +1,5 @@
 import type { District } from './districts.ts';
-import {
-	districtNavigation,
-	districtTotals,
-	durationToMinutes,
-	formatDuration,
-	sortDistricts,
-} from './districts.ts';
+import { districtNavigation, districtTotals, formatDuration, sortDistricts } from './districts.ts';
 import { describe, expect, it } from 'vitest';
 
 function district(
@@ -28,12 +22,6 @@ function district(
 }
 
 describe('district utilities', () => {
-	it('converts legacy H:MM durations to explicit minutes', () => {
-		expect(durationToMinutes('5:17')).toBe(317);
-		expect(durationToMinutes('1:04')).toBe(64);
-		expect(() => durationToMinutes('2:75')).toThrow('Invalid duration');
-	});
-
 	it('formats exact durations and omits zero-value units', () => {
 		expect(formatDuration(90)).toBe('1 hr 30 min');
 		expect(formatDuration(244)).toBe('4 hr 4 min');

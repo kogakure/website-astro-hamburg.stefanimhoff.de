@@ -2,15 +2,6 @@ import type { CollectionEntry } from 'astro:content';
 
 export type District = CollectionEntry<'districts'>;
 
-export function durationToMinutes(duration: string): number {
-	const match = /^(\d+):(\d{2})$/.exec(duration);
-	if (!match) throw new Error(`Invalid duration: ${duration}`);
-	const hours = Number(match[1]);
-	const minutes = Number(match[2]);
-	if (minutes > 59) throw new Error(`Invalid duration: ${duration}`);
-	return hours * 60 + minutes;
-}
-
 export function formatDuration(minutes: number): string {
 	const hours = Math.floor(minutes / 60);
 	const remainingMinutes = minutes % 60;

@@ -1,9 +1,19 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { getPublicImageDimensions } from '@/lib/image-dimensions.ts';
 
 type Props = HTMLAttributes<'img'> & { src: string; alt: string };
 
 const { src, alt, loading = 'lazy', decoding = 'async', ...props } = Astro.props;
+const { width, height } = getPublicImageDimensions(src);
 ---
 
-<img src={src} alt={alt} {...props} loading={loading} decoding={decoding} />
+<img
+	src={src}
+	alt={alt}
+	{...props}
+	width={width}
+	height={height}
+	loading={loading}
+	decoding={decoding}
+/>

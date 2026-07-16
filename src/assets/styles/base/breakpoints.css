@@ -1,4 +1,0 @@
-/** Breakpoints */
-@custom-media --phone (width >= 320px);
-@custom-media --tablet (width >= 768px);
-@custom-media --desktop (width >= 1200px);

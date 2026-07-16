@@ -47,7 +47,7 @@ const serviceWorkerRegistration = `
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content={siteConfig.author} />
 		<meta name="description" content={description} />
-		<meta name="theme-color" content="#163344" />
+		<meta name="theme-color" content="#030f18" />
 		{robots && <meta name="robots" content={robots} />}
 		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		<meta property="og:type" content={ogType} />
@@ -74,6 +74,13 @@ const serviceWorkerRegistration = `
 			href="/index.xml"
 		/>
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link
+			rel="preload"
+			href="/assets/fonts/secuela-regular-vf.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
 		{
 			structuredData && (
 				<script

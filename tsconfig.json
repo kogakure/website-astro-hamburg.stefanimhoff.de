@@ -5,15 +5,7 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["vitest/globals", "vitest-axe/extend-expect"]
+		"types": ["vitest/globals"]
 	},
-	"include": [".astro/types.d.ts", "src/**/*", "tests/**/*", "*.config.*"],
-	"exclude": [
-		".eleventy.js",
-		"gulpfile.js",
-		"plopfile.js",
-		"postcss.config.js",
-		"src/**/*.js",
-		"workbox.config.js"
-	]
+	"include": [".astro/types.d.ts", "src/**/*", "tests/**/*", "scripts/**/*", "*.config.*"]
 }

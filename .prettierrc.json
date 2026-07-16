@@ -1,18 +1,18 @@
 {
 	"endOfLine": "lf",
-	"semi": true,
-	"singleQuote": true,
-	"useTabs": true,
-	"tabWidth": 4,
+	"plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
 	"printWidth": 100,
-	"trailingComma": "es5",
+	"semi": true,
 	"overrides": [
 		{
-			"files": "*.md",
+			"files": "*.astro",
 			"options": {
-				"singleQuote": false,
-				"tabWidth": 2
+				"parser": "astro"
 			}
 		}
-	]
+	],
+	"singleQuote": true,
+	"trailingComma": "all",
+	"useTabs": true,
+	"tabWidth": 4
 }

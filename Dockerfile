@@ -1,24 +1,34 @@
-# Stage 1: Build the application
-FROM --platform=linux/amd64 node:22-alpine AS builder
+ARG NODE_VERSION=22.13.1
+ARG PNPM_VERSION=11.8.0
+ARG NGINX_VERSION=1.27-alpine
 
-RUN corepack enable
+FROM node:${NODE_VERSION}-alpine AS base
 
 WORKDIR /app
+RUN npm install --global pnpm@${PNPM_VERSION}
 
-COPY package.json pnpm-lock.yaml ./
+FROM base AS dependencies
 
-RUN pnpm install --frozen-lockfile
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+	pnpm install --frozen-lockfile --prefer-offline
+
+FROM dependencies AS builder
 
 COPY . .
 
 RUN pnpm run build
 
-# Stage 2: Serve the application using Nginx
-FROM nginx:stable-alpine
+FROM nginx:${NGINX_VERSION} AS production
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+	CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+
 CMD ["nginx", "-g", "daemon off;"]

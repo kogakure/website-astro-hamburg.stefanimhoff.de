@@ -1,0 +1,21 @@
+<script is:inline>
+	(() => {
+		let storedTheme = null;
+
+		try {
+			storedTheme = localStorage.getItem('theme');
+		} catch {
+			// Storage can be unavailable in privacy-focused browsing modes.
+		}
+
+		const theme =
+			storedTheme === 'light' || storedTheme === 'dark'
+				? storedTheme
+				: window.matchMedia('(prefers-color-scheme: dark)').matches
+					? 'dark'
+					: 'light';
+
+		document.documentElement.dataset.theme = theme;
+		document.documentElement.style.colorScheme = theme;
+	})();
+</script>

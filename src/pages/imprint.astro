@@ -1,0 +1,97 @@
+---
+import EmailLink from '@/components/EmailLink.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="Imprint · Exploring Hamburg"
+	description="Contact, acknowledgments, license, and data protection information for Exploring Hamburg."
+	canonicalPath="/imprint/"
+	robots="noindex,follow"
+>
+	<main id="main" class="narrow-page">
+		<h1>Imprint</h1>
+
+		<h2>Contact Person</h2>
+		<p>Stefan Imhoff<br /><EmailLink /></p>
+
+		<h2>Acknowledgments</h2>
+		<ul>
+			<li>
+				This website is built with <a href="https://astro.build/">Astro</a>, the web
+				framework for content-driven websites.
+			</li>
+			<li>
+				The design was created with <a href="https://affinity.serif.com/designer/"
+					>Affinity Designer</a
+				> and uses the typeface <a href="https://fontlibrary.org/en/font/secuela-variable"
+					>Secuela</a
+				> by <a href="https://github.com/defharo">deFharo</a>.
+			</li>
+			<li>
+				The minimalistic icons are created by <a href="https://remixicon.com/">Remix Icon</a
+				> which is <a href="https://github.com/xiaochunjimmy">Jimmy Cheung</a> and <a
+					href="https://github.com/wendygaoyuan">Wendy Gao</a
+				>.
+			</li>
+		</ul>
+
+		<h2>License</h2>
+		<p>
+			All content is copyrighted by <a href="https://www.stefanimhoff.de">Stefan Imhoff</a> unless
+			otherwise stated. Feel free to learn from the <a
+				href="https://github.com/kogakure/website-11ty-hamburg.stefanimhoff.de"
+				>Source Code</a
+			> and reuse code for your projects.
+		</p>
+		<p>
+			The use of my design—the unique combination of layout, photos, or illustrations—my
+			private photos, personal data, and logo are only allowed with written permission.
+		</p>
+		<p>
+			In <em>easier</em> words: <strong>This is not a free theme</strong>. Learn from it.
+			Remix. Reuse. Build your own stuff. 🤘
+		</p>
+
+		<h2>Legal Fine Print</h2>
+		<p>
+			Responsible for content according to § 10 paragraph 3 MDStV: <strong
+				>Stefan&nbsp;Imhoff</strong
+			>.
+		</p>
+
+		<h2>Liability Notice</h2>
+		<p>
+			Despite careful content control, I don’t take <em>any liability</em> for the content of external
+			links. The content of the linked pages is the sole responsibility of their operators.
+		</p>
+		<p>
+			If you find a link on my website that links to a website that violates applicable law,
+			please let me know so I can remove the link.
+		</p>
+
+		<h2>Data Protection</h2>
+		<p>
+			This website uses Umami, an open-source, privacy-focused analytics platform, to collect
+			anonymized data about visitors’ interactions with the site. No personally identifiable
+			information is tracked or stored. This data is only used to understand and improve the
+			website experience, and is never sold or shared with third parties.
+		</p>
+	</main>
+</BaseLayout>
+
+<style>
+	.narrow-page {
+		max-width: 48rem;
+		margin-inline: auto;
+		padding: 4rem 1.5rem 6rem;
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+	h1 {
+		font-size: clamp(3rem, 8vw, 5rem);
+	}
+	h2 {
+		margin-top: 3rem;
+	}
+</style>

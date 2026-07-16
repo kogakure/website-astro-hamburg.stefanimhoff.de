@@ -1,0 +1,43 @@
+---
+import type { District } from '@/lib/districts.ts';
+
+export interface Props {
+	previous: District | null;
+	next: District | null;
+}
+
+const { previous, next } = Astro.props;
+---
+
+<nav class="district-navigation" aria-label="District walks">
+	{
+		previous ? (
+			<a href={`/${previous.id}/`} rel="prev">
+				← {previous.data.title}
+			</a>
+		) : (
+			<span />
+		)
+	}
+	{
+		next && (
+			<a href={`/${next.id}/`} rel="next">
+				{next.data.title} →
+			</a>
+		)
+	}
+</nav>
+
+<style>
+	.district-navigation {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		margin-top: 4rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-rule);
+	}
+	.district-navigation a:last-child {
+		text-align: right;
+	}
+</style>

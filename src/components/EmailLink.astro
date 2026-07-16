@@ -1,0 +1,10 @@
+---
+export interface Props {
+	label?: string;
+}
+
+const { label = 'E-Mail' } = Astro.props;
+const address = ['mail', 'stefanimhoff.de'].join('@');
+---
+
+<a href={`mailto:${address}`}>{label}</a>

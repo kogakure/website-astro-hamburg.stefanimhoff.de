@@ -1,0 +1,33 @@
+---
+import type { District } from '@/lib/districts.ts';
+import { districtThumbnail } from '@/lib/districts.ts';
+
+export interface Props {
+	district: District;
+}
+
+const { district } = Astro.props;
+---
+
+<article class="district-card">
+	<a href={`/${district.id}/`}>
+		<img src={districtThumbnail(district)} alt="" loading="lazy" decoding="async" />
+		<h3>{district.data.title}</h3>
+	</a>
+</article>
+
+<style>
+	.district-card a {
+		display: block;
+		text-decoration: none;
+	}
+	.district-card img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.district-card h3 {
+		margin: 0.75rem 0 0;
+		font-size: 1.25rem;
+	}
+</style>

@@ -1,0 +1,150 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+import ContentImage from '@/components/ContentImage.astro';
+import ContentLink from '@/components/ContentLink.astro';
+import DistrictNavigation from '@/components/DistrictNavigation.astro';
+import MapEmbed from '@/components/MapEmbed.astro';
+import YouTubeEmbed from '@/components/YouTubeEmbed.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { districtHero, districtNavigation } from '@/lib/districts.ts';
+
+export async function getStaticPaths() {
+	const districts = await getCollection('districts');
+	return districts.map((district) => ({
+		params: { slug: district.id },
+		props: { district, districts },
+	}));
+}
+
+interface Props {
+	district: CollectionEntry<'districts'>;
+	districts: CollectionEntry<'districts'>[];
+}
+
+const { district, districts } = Astro.props;
+const { Content } = await render(district);
+const { previous, next } = districtNavigation(districts, district.id);
+const canonicalPath = `/${district.id}/`;
+const image = districtHero(district);
+const description = `Photographs, a map, and walking notes from exploring ${district.data.title} in Hamburg.`;
+const pageUrl = new URL(canonicalPath, Astro.site);
+const structuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		headline: district.data.title,
+		datePublished: district.data.date.toISOString(),
+		author: { '@type': 'Person', name: district.data.author },
+		image: new URL(image, Astro.site),
+		mainEntityOfPage: pageUrl,
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: 'Exploring Hamburg',
+				item: new URL('/', Astro.site),
+			},
+			{ '@type': 'ListItem', position: 2, name: district.data.title, item: pageUrl },
+		],
+	},
+];
+const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTubeEmbed };
+---
+
+<BaseLayout
+	title={`${district.data.title} · Exploring Hamburg`}
+	{description}
+	{canonicalPath}
+	ogType="article"
+	{image}
+	publishedTime={district.data.date}
+	{structuredData}
+>
+	<main id="main" class="district-page">
+		<nav class="breadcrumbs" aria-label="Breadcrumb">
+			<a href="/">Exploring Hamburg</a> / {district.data.title}
+		</nav>
+		<img
+			class="district-hero"
+			src={image}
+			alt={district.data.title}
+			fetchpriority="high"
+			decoding="async"
+		/>
+		<header class="district-title">
+			<h1>{district.data.title}</h1>
+			<p>
+				{district.data.distanceKm} km / {Math.round(district.data.durationMinutes / 60)} hrs.
+			</p>
+		</header>
+		<article class="district-content">
+			<Content components={contentComponents} />
+		</article>
+		<DistrictNavigation {previous} {next} />
+	</main>
+</BaseLayout>
+
+<style>
+	.district-page {
+		max-width: 75rem;
+		margin-inline: auto;
+		padding: 2rem 1.5rem 5rem;
+	}
+	.breadcrumbs {
+		margin-bottom: 1rem;
+		color: var(--color-muted);
+		font-size: 0.875rem;
+	}
+	.district-hero {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.district-title,
+	.district-content,
+	:global(.district-navigation) {
+		max-width: 48rem;
+		margin-inline: auto;
+	}
+	.district-title {
+		margin-block: 3rem;
+	}
+	.district-title h1 {
+		margin: 0;
+		font-size: clamp(3rem, 8vw, 6rem);
+		line-height: 0.95;
+	}
+	.district-title p {
+		color: var(--color-muted);
+	}
+	.district-content {
+		font-size: 1.1rem;
+		line-height: 1.75;
+	}
+	.district-content :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-block: 2rem;
+	}
+	.district-content :global(.embed) {
+		margin: 2rem 0;
+	}
+	.district-content :global(.embed iframe) {
+		width: 100%;
+		border: 0;
+		aspect-ratio: 16 / 9;
+	}
+	.district-content :global(.embed-map iframe) {
+		min-height: 30rem;
+	}
+	.district-content :global(figcaption) {
+		color: var(--color-muted);
+		font-size: 0.875rem;
+	}
+</style>

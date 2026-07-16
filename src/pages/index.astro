@@ -1,24 +1,139 @@
 ---
+import { getCollection } from 'astro:content';
+
+import DistrictCard from '@/components/DistrictCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { districtTotals, sortDistricts } from '@/lib/districts.ts';
+
+const districts = sortDistricts(await getCollection('districts'));
+const totals = districtTotals(districts);
+const description =
+	'Walking through the districts of Hamburg: photographs, maps, and notes from exploring the city on foot.';
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Exploring Hamburg',
+	url: new URL('/', Astro.site),
+	description,
+};
 ---
 
-<BaseLayout
-	title="Exploring Hamburg"
-	description="Walking through the districts of Hamburg, one route at a time."
-	canonicalPath="/"
->
-	<main id="main" class="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-16">
-		<div>
-			<p class="mb-4 text-sm font-semibold tracking-[0.18em] uppercase">
-				Astro migration baseline
-			</p>
-			<h1 class="max-w-3xl text-5xl leading-none font-semibold tracking-tight md:text-7xl">
-				Exploring Hamburg
-			</h1>
-			<p class="mt-8 max-w-2xl text-xl leading-relaxed">
-				The district walks are being prepared for their new field journal. Existing content
-				remains untouched while the Astro foundation is established.
-			</p>
+<BaseLayout title="Exploring Hamburg" {description} canonicalPath="/" {structuredData}>
+	<main id="main">
+		<div class="homepage-hero image-shadow">
+			<img
+				sizes="(max-width: 1200px) 100vw, 1200px"
+				srcset="/assets/images/core/homepage-hero-300.jpg 300w, /assets/images/core/homepage-hero-600.jpg 600w, /assets/images/core/homepage-hero-1200.jpg 1200w, /assets/images/core/homepage-hero.jpg 1800w"
+				src="/assets/images/core/homepage-hero.jpg"
+				alt="Feuerschiff"
+				fetchpriority="high"
+				decoding="async"
+			/>
 		</div>
+
+		<section class="content-section" aria-labelledby="about-title">
+			<h1>Exploring Hamburg</h1>
+			<h2 id="about-title">About</h2>
+			<p>
+				After living in Hamburg for more than 10 years, and still only knowing a small part
+				of the city, I decided in 2015 to explore every district completely.
+			</p>
+			<p>
+				I travel with my camera and a map all 109 districts of Hamburg – as complete as
+				possible, mostly by foot.
+			</p>
+		</section>
+
+		<div class="statistics-image image-shadow">
+			<img
+				sizes="(max-width: 1200px) 100vw, 1200px"
+				srcset="/assets/images/core/map-300.jpg 300w, /assets/images/core/map-600.jpg 600w, /assets/images/core/map-1200.jpg 1200w, /assets/images/core/map.jpg 1800w"
+				src="/assets/images/core/map.jpg"
+				alt="Historical Map of Hamburg"
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+
+		<section class="content-section" aria-labelledby="statistics-title">
+			<h2 id="statistics-title">Statistics</h2>
+			<dl class="statistics">
+				<div><dt>Kilometers</dt><dd>{totals.distanceKm}</dd></div>
+				<div><dt>Hours</dt><dd>{totals.durationHours}</dd></div>
+				<div><dt>Districts</dt><dd>{totals.count}</dd></div>
+			</dl>
+		</section>
+
+		<section class="content-section districts" aria-labelledby="districts-title">
+			<h2 id="districts-title">Districts</h2>
+			<div class="district-grid">
+				{districts.map((district) => <DistrictCard {district} />)}
+			</div>
+		</section>
 	</main>
 </BaseLayout>
+
+<style>
+	main {
+		max-width: 75rem;
+		margin-inline: auto;
+		padding: 0 1.5rem 5rem;
+	}
+	.homepage-hero,
+	.statistics-image {
+		margin-inline: -1.5rem;
+	}
+	.homepage-hero img,
+	.statistics-image img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.content-section {
+		max-width: 48rem;
+		margin: 4rem auto;
+	}
+	h1 {
+		font-size: clamp(3rem, 8vw, 6rem);
+		line-height: 0.95;
+	}
+	h2 {
+		margin-top: 2rem;
+		font-size: 1.5rem;
+	}
+	p {
+		font-size: 1.2rem;
+		line-height: 1.7;
+	}
+	.statistics {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+	.statistics div {
+		display: flex;
+		flex-direction: column-reverse;
+		border-top: 1px solid var(--color-rule);
+		padding-top: 1rem;
+	}
+	.statistics dd {
+		margin: 0;
+		font-size: clamp(2.5rem, 7vw, 5rem);
+	}
+	.statistics dt {
+		color: var(--color-muted);
+	}
+	.districts {
+		max-width: none;
+	}
+	.district-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+		gap: 2rem 1.5rem;
+	}
+	@media (max-width: 35rem) {
+		.statistics {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

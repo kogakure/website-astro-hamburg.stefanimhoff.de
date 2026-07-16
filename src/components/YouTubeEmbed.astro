@@ -1,0 +1,20 @@
+---
+export interface Props {
+	id: string;
+	title?: string;
+}
+
+const { id, title = 'Video from this district walk' } = Astro.props;
+const src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`;
+const fallback = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+---
+
+<figure class="embed embed-video">
+	<iframe
+		src={src}
+		title={title}
+		loading="lazy"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		allowfullscreen></iframe>
+	<figcaption><a href={fallback}>Watch this video on YouTube</a></figcaption>
+</figure>

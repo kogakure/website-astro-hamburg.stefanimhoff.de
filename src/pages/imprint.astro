@@ -10,7 +10,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 	robots="noindex,follow"
 >
 	<main id="main" class="narrow-page">
-		<h1>Imprint</h1>
+		<header class="legal-header">
+			<p>Project information</p>
+			<h1>Imprint</h1>
+		</header>
 
 		<h2>Contact Person</h2>
 		<p>Stefan Imhoff<br /><EmailLink /></p>
@@ -82,16 +85,33 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 <style>
 	.narrow-page {
-		max-width: 48rem;
+		max-width: var(--reading-width);
 		margin-inline: auto;
-		padding: 4rem 1.5rem 6rem;
-		font-size: 1.1rem;
-		line-height: 1.7;
+		padding: clamp(3rem, 8vw, 7rem) var(--page-gutter) clamp(6rem, 11vw, 10rem);
+		font-size: clamp(1rem, 1.2vw, 1.125rem);
+		line-height: 1.72;
+	}
+	.legal-header {
+		margin-bottom: clamp(4rem, 9vw, 7rem);
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-rule);
+	}
+	.legal-header p {
+		margin: 0 0 1rem;
+		color: var(--color-muted);
+		font-size: 0.85rem;
 	}
 	h1 {
-		font-size: clamp(3rem, 8vw, 5rem);
+		font-size: clamp(3.25rem, 8vw, 5.5rem);
 	}
 	h2 {
-		margin-top: 3rem;
+		margin: clamp(3rem, 7vw, 5rem) 0 1rem;
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+	}
+	ul {
+		padding-left: 1.25rem;
+	}
+	li + li {
+		margin-top: 0.75rem;
 	}
 </style>

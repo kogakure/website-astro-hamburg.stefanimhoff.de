@@ -7,17 +7,63 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 	description="The requested page could not be found."
 	robots="noindex,follow"
 >
-	<main id="main" class="mx-auto max-w-3xl px-6 py-24">
-		<h1 class="text-5xl font-semibold">Error 404</h1>
-		<p class="mt-6 text-xl">
+	<main id="main" class="not-found">
+		<div class="error-bearing" aria-hidden="true">404 / position unknown</div>
+		<h1>Error 404</h1>
+		<p class="error-message">
 			So’n Schiet<sup><a href="#schiet" aria-describedby="footnote-label">1</a></sup>. This
 			Page Can’t Be Found.
 		</p>
-		<p><a class="underline" href="/">Go back to the Homepage</a>.</p>
-		<footer id="schiet" class="mt-12 border-t pt-4">
+		<p>Go back to the <a href="/">Homepage</a>.</p>
+		<footer id="schiet" class="error-footnote">
 			<span id="footnote-label" class="sr-only">Footnote</span><p>
 				<sup>1</sup> “such a crap” (Hamburg Dialect)
 			</p>
 		</footer>
 	</main>
 </BaseLayout>
+
+<style>
+	.not-found {
+		max-width: 66rem;
+		min-height: min(72vh, 48rem);
+		margin-inline: auto;
+		padding: clamp(4rem, 10vw, 9rem) var(--page-gutter);
+	}
+	.error-bearing {
+		margin-bottom: clamp(2rem, 6vw, 5rem);
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--color-rule);
+		color: var(--color-buoy);
+		font-size: 0.82rem;
+		font-variant-numeric: tabular-nums;
+	}
+	h1 {
+		font-size: clamp(3.5rem, 12vw, 6rem);
+	}
+	.error-message {
+		max-width: 28ch;
+		margin-block: 1.5rem;
+		font-size: clamp(1.4rem, 3vw, 2.3rem);
+		line-height: 1.25;
+	}
+	.error-message sup a {
+		display: inline-flex;
+		min-width: 1.5rem;
+		min-height: 1.5rem;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.55em;
+	}
+	.error-footnote {
+		max-width: 32rem;
+		margin-top: clamp(4rem, 10vw, 8rem);
+		padding-top: 1rem;
+		border-top: 1px solid var(--color-rule);
+		color: var(--color-muted);
+		font-size: 0.9rem;
+	}
+	.error-footnote p {
+		margin: 0;
+	}
+</style>

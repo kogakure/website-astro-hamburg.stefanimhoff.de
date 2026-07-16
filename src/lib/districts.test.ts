@@ -3,6 +3,7 @@ import {
 	districtNavigation,
 	districtTotals,
 	durationToMinutes,
+	formatDuration,
 	sortDistricts,
 } from './districts.ts';
 import { describe, expect, it } from 'vitest';
@@ -31,6 +32,14 @@ describe('district utilities', () => {
 		expect(durationToMinutes('5:17')).toBe(317);
 		expect(durationToMinutes('1:04')).toBe(64);
 		expect(() => durationToMinutes('2:75')).toThrow('Invalid duration');
+	});
+
+	it('formats exact durations and omits zero-value units', () => {
+		expect(formatDuration(90)).toBe('1 hr 30 min');
+		expect(formatDuration(244)).toBe('4 hr 4 min');
+		expect(formatDuration(60)).toBe('1 hr');
+		expect(formatDuration(45)).toBe('45 min');
+		expect(formatDuration(0)).toBe('0 min');
 	});
 
 	it('sorts titles alphabetically without mutating the input', () => {

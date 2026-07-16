@@ -108,12 +108,18 @@ const serviceWorkerRegistration = `
 <style>
 	.skip-link {
 		position: fixed;
-		z-index: 10;
+		z-index: 100;
 		top: 1rem;
 		left: 1rem;
 		translate: 0 -200%;
-		background: var(--color-paper);
-		color: var(--color-ink);
+		min-height: 2.75rem;
+		display: inline-flex;
+		align-items: center;
+		background: var(--color-ink);
+		color: var(--color-canvas);
+		font-weight: 650;
+		text-decoration: none;
+		border: 1px solid var(--color-canvas);
 		padding: 0.75rem 1rem;
 	}
 

@@ -20,120 +20,273 @@ const structuredData = {
 
 <BaseLayout title="Exploring Hamburg" {description} canonicalPath="/" {structuredData}>
 	<main id="main">
-		<div class="homepage-hero image-shadow">
+		<section class="homepage-hero" aria-labelledby="homepage-title">
 			<img
 				sizes="(max-width: 1200px) 100vw, 1200px"
 				srcset="/assets/images/core/homepage-hero-300.jpg 300w, /assets/images/core/homepage-hero-600.jpg 600w, /assets/images/core/homepage-hero-1200.jpg 1200w, /assets/images/core/homepage-hero.jpg 1800w"
 				src="/assets/images/core/homepage-hero.jpg"
-				alt="Feuerschiff"
+				alt="Red lightship and boats in Hamburg harbor"
 				fetchpriority="high"
 				decoding="async"
 			/>
-		</div>
-
-		<section class="content-section" aria-labelledby="about-title">
-			<h1>Exploring Hamburg</h1>
-			<h2 id="about-title">About</h2>
-			<p>
-				After living in Hamburg for more than 10 years, and still only knowing a small part
-				of the city, I decided in 2015 to explore every district completely.
-			</p>
-			<p>
-				I travel with my camera and a map all 109 districts of Hamburg – as complete as
-				possible, mostly by foot.
-			</p>
-		</section>
-
-		<div class="statistics-image image-shadow">
-			<img
-				sizes="(max-width: 1200px) 100vw, 1200px"
-				srcset="/assets/images/core/map-300.jpg 300w, /assets/images/core/map-600.jpg 600w, /assets/images/core/map-1200.jpg 1200w, /assets/images/core/map.jpg 1800w"
-				src="/assets/images/core/map.jpg"
-				alt="Historical Map of Hamburg"
-				loading="lazy"
-				decoding="async"
-			/>
-		</div>
-
-		<section class="content-section" aria-labelledby="statistics-title">
-			<h2 id="statistics-title">Statistics</h2>
-			<dl class="statistics">
-				<div><dt>Kilometers</dt><dd>{totals.distanceKm}</dd></div>
-				<div><dt>Hours</dt><dd>{totals.durationHours}</dd></div>
-				<div><dt>Districts</dt><dd>{totals.count}</dd></div>
-			</dl>
-		</section>
-
-		<section class="content-section districts" aria-labelledby="districts-title">
-			<h2 id="districts-title">Districts</h2>
-			<div class="district-grid">
-				{districts.map((district) => <DistrictCard {district} />)}
+			<div class="hero-title">
+				<h1 id="homepage-title">Exploring Hamburg</h1>
+				<p>Street by Street, District by District.</p>
 			</div>
+		</section>
+
+		<section class="project-intro" aria-labelledby="about-title">
+			<h2 id="about-title">A city learned on foot</h2>
+			<div class="intro-copy">
+				<p>
+					After living in Hamburg for more than 10 years, and still only knowing a small
+					part of the city, I decided in 2015 to explore every district completely.
+				</p>
+				<p>
+					I travel with my camera and a map all 109 districts of Hamburg – as complete as
+					possible, mostly by foot.
+				</p>
+			</div>
+		</section>
+
+		<section class="walk-record" aria-labelledby="statistics-title">
+			<div class="map-field">
+				<img
+					sizes="(max-width: 1200px) 100vw, 1200px"
+					srcset="/assets/images/core/map-300.jpg 300w, /assets/images/core/map-600.jpg 600w, /assets/images/core/map-1200.jpg 1200w, /assets/images/core/map.jpg 1800w"
+					src="/assets/images/core/map.jpg"
+					alt="Historical map of Hamburg and the Elbe"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+			<div class="ledger">
+				<h2 id="statistics-title">Walk record</h2>
+				<p>A running log of the published routes.</p>
+				<dl class="statistics">
+					<div>
+						<dt>Distance walked</dt><dd>
+							<strong>{totals.distanceKm}</strong>
+							<span>km</span>
+						</dd>
+					</div>
+					<div>
+						<dt>Time on foot</dt><dd>
+							<strong>{totals.durationHours}</strong>
+							<span>hours</span>
+						</dd>
+					</div>
+					<div>
+						<dt>District walks</dt><dd>
+							<strong>{totals.count}</strong>
+							<span>published</span>
+						</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<section class="districts" aria-labelledby="districts-title">
+			<header class="districts-heading">
+				<h2 id="districts-title">District atlas</h2>
+				<p>{districts.length} published walks, ordered alphabetically.</p>
+			</header>
+			<ol class="district-index">
+				{districts.map((district, index) => <DistrictCard {district} {index} />)}
+			</ol>
 		</section>
 	</main>
 </BaseLayout>
 
 <style>
 	main {
-		max-width: 75rem;
+		max-width: var(--shell-width);
 		margin-inline: auto;
-		padding: 0 1.5rem 5rem;
+		padding: 0 var(--page-gutter) clamp(5rem, 10vw, 9rem);
 	}
-	.homepage-hero,
-	.statistics-image {
-		margin-inline: -1.5rem;
+
+	.homepage-hero {
+		position: relative;
+		margin-inline: calc(-1 * var(--page-gutter));
+		border-bottom: 1px solid var(--color-rule);
 	}
-	.homepage-hero img,
-	.statistics-image img {
+
+	.homepage-hero img {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: clamp(20rem, 61vw, 52rem);
+		object-fit: cover;
+		object-position: center;
 	}
-	.content-section {
-		max-width: 48rem;
-		margin: 4rem auto;
-	}
-	h1 {
-		font-size: clamp(3rem, 8vw, 6rem);
-		line-height: 0.95;
-	}
-	h2 {
-		margin-top: 2rem;
-		font-size: 1.5rem;
-	}
-	p {
-		font-size: 1.2rem;
-		line-height: 1.7;
-	}
-	.statistics {
+
+	.hero-title {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: end;
+		gap: 1rem 3rem;
+		padding: clamp(1.25rem, 4vw, 3.5rem) var(--page-gutter);
+		background: var(--color-canvas);
 	}
-	.statistics div {
-		display: flex;
-		flex-direction: column-reverse;
-		border-top: 1px solid var(--color-rule);
-		padding-top: 1rem;
+
+	h1 {
+		max-width: 11ch;
+		font-size: clamp(3.4rem, 9vw, 6rem);
 	}
-	.statistics dd {
-		margin: 0;
-		font-size: clamp(2.5rem, 7vw, 5rem);
+
+	.hero-title p {
+		max-width: 18rem;
+		margin: 0 0 0.35rem;
+		color: var(--color-muted);
+		font-size: clamp(1rem, 1.5vw, 1.25rem);
+		font-style: italic;
+		line-height: 1.35;
 	}
-	.statistics dt {
+
+	.project-intro {
+		display: grid;
+		grid-template-columns: minmax(12rem, 0.75fr) minmax(18rem, 1.25fr);
+		gap: clamp(2rem, 8vw, 8rem);
+		max-width: 78rem;
+		margin: clamp(5rem, 11vw, 10rem) auto;
+		padding-inline: clamp(0rem, 4vw, 4rem);
+	}
+
+	.project-intro h2,
+	.walk-record h2,
+	.districts h2 {
+		font-size: clamp(2.25rem, 5vw, 4.5rem);
+	}
+
+	.intro-copy {
+		max-width: var(--reading-width);
+		font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+		line-height: 1.65;
+	}
+
+	.intro-copy p:first-child {
+		margin-top: 0;
+	}
+
+	.walk-record {
+		display: grid;
+		grid-template-columns: minmax(0, 1.65fr) minmax(18rem, 0.75fr);
+		align-items: stretch;
+		border-block: 1px solid var(--color-rule);
+	}
+
+	.map-field {
+		min-height: 28rem;
+		background: var(--color-photo-frame);
+	}
+
+	.map-field img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(1) contrast(1.02);
+	}
+
+	:global([data-theme='dark']) .map-field img {
+		filter: grayscale(1) invert(0.87) hue-rotate(170deg) brightness(0.66) contrast(1.1);
+	}
+
+	.ledger {
+		padding: clamp(2rem, 5vw, 4.5rem);
+		background: var(--color-surface);
+	}
+
+	.ledger > p {
+		margin: 1rem 0 2.5rem;
 		color: var(--color-muted);
 	}
-	.districts {
-		max-width: none;
+
+	.statistics {
+		margin: 0;
 	}
-	.district-grid {
+
+	.statistics div {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-		gap: 2rem 1.5rem;
+		grid-template-columns: 1fr auto;
+		align-items: baseline;
+		gap: 1rem;
+		border-top: 1px solid var(--color-rule);
+		padding-block: 1rem;
 	}
-	@media (max-width: 35rem) {
-		.statistics {
+
+	.statistics dd {
+		margin: 0;
+		font-size: clamp(1.6rem, 3vw, 2.6rem);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.statistics dd strong {
+		font-weight: 620;
+		font-variation-settings: 'wght' 620;
+	}
+
+	.statistics dd span {
+		font-size: 0.8rem;
+		font-weight: 400;
+	}
+
+	.statistics dt {
+		color: var(--color-muted);
+		font-size: 0.9rem;
+	}
+
+	.districts {
+		max-width: 80rem;
+		margin: clamp(6rem, 12vw, 11rem) auto 0;
+	}
+
+	.districts-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 1rem 3rem;
+		margin-bottom: clamp(2rem, 5vw, 4rem);
+	}
+
+	.districts-heading p {
+		max-width: 18rem;
+		margin: 0 0 0.4rem;
+		color: var(--color-muted);
+	}
+
+	.district-index {
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--color-rule);
+	}
+
+	@media (max-width: 48rem) {
+		.hero-title,
+		.project-intro,
+		.walk-record {
 			grid-template-columns: 1fr;
+		}
+
+		.hero-title p {
+			max-width: none;
+		}
+
+		.project-intro {
+			gap: 2rem;
+			padding-inline: 0;
+		}
+
+		.walk-record {
+			margin-inline: calc(-1 * var(--page-gutter));
+		}
+
+		.map-field {
+			min-height: 22rem;
+		}
+
+		.districts-heading {
+			align-items: start;
+			flex-direction: column;
 		}
 	}
 </style>

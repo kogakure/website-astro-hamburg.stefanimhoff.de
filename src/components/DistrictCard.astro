@@ -1,33 +1,112 @@
 ---
 import type { District } from '@/lib/districts.ts';
-import { districtThumbnail } from '@/lib/districts.ts';
+import { districtThumbnail, formatDuration } from '@/lib/districts.ts';
 
 export interface Props {
 	district: District;
+	index: number;
 }
 
-const { district } = Astro.props;
+const { district, index } = Astro.props;
 ---
 
-<article class="district-card">
+<li class="district-card">
 	<a href={`/${district.id}/`}>
-		<img src={districtThumbnail(district)} alt="" loading="lazy" decoding="async" />
-		<h3>{district.data.title}</h3>
+		<span class="district-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+		<img
+			src={districtThumbnail(district)}
+			alt={`A view from the ${district.data.title} walk`}
+			loading="lazy"
+			decoding="async"
+		/>
+		<span class="district-name">{district.data.title}</span>
+		<span class="district-log">
+			{district.data.distanceKm} km · {formatDuration(district.data.durationMinutes)}
+		</span>
 	</a>
-</article>
+</li>
 
 <style>
+	.district-card {
+		list-style: none;
+		border-top: 1px solid var(--color-rule);
+	}
+
 	.district-card a {
-		display: block;
+		display: grid;
+		grid-template-columns: 2.5rem minmax(5rem, 8rem) minmax(0, 1fr) auto;
+		align-items: center;
+		gap: clamp(0.75rem, 2vw, 1.5rem);
+		min-height: 7rem;
+		padding-block: 0.75rem;
+		color: var(--color-ink);
 		text-decoration: none;
 	}
+
+	.district-card a:hover .district-name {
+		color: var(--color-tide);
+	}
+
+	.district-number {
+		color: var(--color-buoy);
+		font-size: 0.78rem;
+		font-variant-numeric: tabular-nums;
+	}
+
 	.district-card img {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 5.5rem;
+		object-fit: cover;
+		filter: saturate(0.9);
+		transition: filter 180ms var(--ease-out);
 	}
-	.district-card h3 {
-		margin: 0.75rem 0 0;
-		font-size: 1.25rem;
+
+	.district-card:nth-child(4n + 2) img {
+		object-position: 50% 35%;
+	}
+
+	.district-card a:hover img {
+		filter: saturate(1.08);
+	}
+
+	.district-name {
+		font-size: clamp(1.35rem, 2.5vw, 2.2rem);
+		font-weight: 620;
+		font-variation-settings: 'wght' 620;
+		letter-spacing: -0.02em;
+		transition: color 160ms var(--ease-out);
+	}
+
+	.district-log {
+		color: var(--color-muted);
+		font-size: 0.85rem;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+	}
+
+	@media (min-width: 64rem) {
+		.district-card:nth-child(5n + 1) a {
+			grid-template-columns: 2.5rem minmax(8rem, 12rem) minmax(0, 1fr) auto;
+		}
+
+		.district-card:nth-child(5n + 1) img {
+			height: 7rem;
+		}
+	}
+
+	@media (max-width: 38rem) {
+		.district-card a {
+			grid-template-columns: 2rem 5rem minmax(0, 1fr);
+			min-height: 5.75rem;
+		}
+
+		.district-card img {
+			height: 4.25rem;
+		}
+
+		.district-log {
+			display: none;
+		}
 	}
 </style>

@@ -11,6 +11,17 @@ export function durationToMinutes(duration: string): number {
 	return hours * 60 + minutes;
 }
 
+export function formatDuration(minutes: number): string {
+	const hours = Math.floor(minutes / 60);
+	const remainingMinutes = minutes % 60;
+	const parts: string[] = [];
+
+	if (hours > 0) parts.push(`${hours} hr`);
+	if (remainingMinutes > 0) parts.push(`${remainingMinutes} min`);
+
+	return parts.join(' ') || '0 min';
+}
+
 export function sortDistricts(districts: District[]): District[] {
 	return [...districts].sort((a, b) =>
 		a.data.title.localeCompare(b.data.title, 'en', { sensitivity: 'base' }),

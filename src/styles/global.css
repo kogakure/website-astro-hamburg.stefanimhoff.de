@@ -5,52 +5,199 @@
 @source '../pages';
 @source '../styles';
 
+@font-face {
+	font-family: 'Secuela';
+	src: url('/assets/fonts/secuela-regular-vf.woff2') format('woff2-variations');
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Secuela';
+	src: url('/assets/fonts/secuela-italic-vf.woff2') format('woff2-variations');
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+}
+
 :root {
 	color-scheme: light;
-	--color-paper: #f2efe6;
-	--color-ink: #163344;
-	--color-muted: #60717a;
-	--color-rule: #c8c4b8;
-	--color-accent: #b7462d;
-	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', serif;
-	background: var(--color-paper);
+	--color-canvas: oklch(97.5% 0.006 235);
+	--color-surface: oklch(93.5% 0.012 235);
+	--color-ink: oklch(22% 0.035 240);
+	--color-muted: oklch(43% 0.028 238);
+	--color-rule: oklch(76% 0.02 235);
+	--color-tide: oklch(38% 0.105 235);
+	--color-tide-hover: oklch(30% 0.095 235);
+	--color-buoy: oklch(47% 0.16 30);
+	--color-photo-frame: oklch(17% 0.025 240);
+	--font-body: 'Secuela', ui-serif, Georgia, serif;
+	--page-gutter: clamp(1.125rem, 4vw, 3rem);
+	--shell-width: 92rem;
+	--reading-width: 70ch;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	font-family: var(--font-body);
+	font-synthesis: none;
+	background: var(--color-canvas);
 	color: var(--color-ink);
 }
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
-	--color-paper: #10232e;
-	--color-ink: #f2efe6;
-	--color-muted: #b4c0c5;
-	--color-rule: #40545e;
-	--color-accent: #e1785f;
+	--color-canvas: oklch(16% 0.028 240);
+	--color-surface: oklch(21.5% 0.035 240);
+	--color-ink: oklch(94% 0.008 235);
+	--color-muted: oklch(74% 0.022 235);
+	--color-rule: oklch(39% 0.035 238);
+	--color-tide: oklch(79% 0.09 225);
+	--color-tide-hover: oklch(88% 0.07 220);
+	--color-buoy: oklch(72% 0.15 30);
+	--color-photo-frame: oklch(10% 0.02 240);
 }
 
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
 html {
 	min-width: 20rem;
-	background: var(--color-paper);
+	background: var(--color-canvas);
+	scroll-behavior: smooth;
+	text-size-adjust: 100%;
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
-	background: var(--color-paper);
+	background: var(--color-canvas);
 	color: var(--color-ink);
+	font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
+	font-variation-settings: 'wght' 400;
+	line-height: 1.65;
+	text-rendering: optimizeLegibility;
+}
+
+main {
+	display: block;
+}
+
+h1,
+h2,
+h3 {
+	margin-block: 0;
+	font-weight: 650;
+	font-variation-settings: 'wght' 650;
+	line-height: 1.02;
+	letter-spacing: -0.025em;
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
 }
 
 a {
-	color: inherit;
+	color: var(--color-tide);
+	text-decoration-color: color-mix(in oklch, currentColor 55%, transparent);
+	text-decoration-thickness: 0.075em;
+	text-underline-offset: 0.18em;
+	transition:
+		color 160ms var(--ease-out),
+		text-decoration-color 160ms var(--ease-out);
 }
 
-:focus-visible {
-	outline: 0.1875rem solid var(--color-accent);
-	outline-offset: 0.1875rem;
+a:hover {
+	color: var(--color-tide-hover);
+	text-decoration-color: currentColor;
 }
 
 button {
 	font: inherit;
+}
+
+img,
+iframe {
+	max-width: 100%;
+}
+
+::selection {
+	background: var(--color-tide);
+	color: var(--color-canvas);
+}
+
+:focus-visible {
+	outline: 0.1875rem solid var(--color-buoy);
+	outline-offset: 0.25rem;
+}
+
+:target,
+:focus {
+	scroll-margin-top: 5rem;
+}
+
+body > main,
+body > header,
+body > footer {
+	animation: journal-arrival 220ms var(--ease-out) both;
+}
+
+body > main {
+	animation-delay: 35ms;
+}
+
+body > footer {
+	animation-delay: 70ms;
+}
+
+@keyframes journal-arrival {
+	from {
+		transform: translateY(0.35rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+@media print {
+	:root {
+		--color-canvas: white;
+		--color-ink: black;
+		--color-muted: #333;
+		--color-rule: #999;
+	}
+
+	.site-header,
+	.site-footer,
+	.theme-toggle,
+	.district-navigation,
+	.embed iframe {
+		display: none !important;
+	}
+
+	body {
+		font-size: 11pt;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	img {
+		break-inside: avoid;
+	}
 }

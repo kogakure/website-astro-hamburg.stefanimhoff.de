@@ -6,14 +6,14 @@
 
 ## Color
 
-Use a restrained light/dark system built from these roles:
+Use a restrained light/dark system built from these final OKLCH roles:
 
-- **Chart paper:** neutral, low-chroma light canvas; not beige or parchment.
-- **Harbor ink:** near-black blue for primary type and strong structure.
-- **Tide blue:** the main interactive and orientation color.
-- **Fog gray:** subdued surfaces and secondary information, with accessible contrast.
-- **Oxidized buoy red:** a scarce accent for route position or important emphasis.
-- **Night water:** deep blue-black dark canvas with light, non-glowing text.
+- **Chart canvas:** `oklch(97.5% 0.006 235)`; a neutral blue-gray, not beige or parchment.
+- **Harbor ink:** `oklch(22% 0.035 240)` for primary type and strong structure.
+- **Tide blue:** `oklch(38% 0.105 235)` for links and orientation.
+- **Fog:** `oklch(43% 0.028 238)` for secondary information and `oklch(93.5% 0.012 235)` for quiet surfaces.
+- **Oxidized buoy red:** `oklch(47% 0.16 30)`, used only for route position and focus.
+- **Night water:** `oklch(16% 0.028 240)` with `oklch(94% 0.008 235)` text; supporting dark roles are raised for equivalent contrast.
 
 Define final tokens in OKLCH and verify WCAG contrast in both themes. Color should support photographs rather than tint them.
 
@@ -26,7 +26,7 @@ Retain the local Secuela regular and italic variable fonts and use their axes fo
 - Photography is dominant: a decisive homepage image, generous district media, and no placeholder illustration.
 - Use an asymmetric editorial rhythm with full-bleed moments, compact metadata, and clear reading columns.
 - Chart-grid hairlines, route traces, coordinates, tide-style annotations, and stamped walk statistics may organize information when they convey location or progress.
-- District browsing may use a responsive index, but avoid a uniform grid of generic floating cards.
+- District browsing uses a numbered, rule-separated atlas index. Thumbnail sizes shift at a measured cadence while alphabetical reading order remains linear.
 - Borders are fine and purposeful; shadows, rounded containers, and decorative layers are exceptional.
 
 ## Core Surfaces
@@ -38,7 +38,7 @@ Retain the local Secuela regular and italic variable fonts and use their axes fo
 
 ## Motion and Interaction
 
-Motion is sparse, CSS-first, and usually under 250ms. Use it for state, orientation, or a single coordinated arrival—not repeated scroll reveals. All motion respects `prefers-reduced-motion`. Interactive elements must have distinct hover, active, and focus-visible states; never nest controls.
+Motion is a single 220ms CSS arrival plus short state transitions; it never gates visibility or reacts to scrolling. All motion respects `prefers-reduced-motion`. Interactive elements have distinct hover, active, and focus-visible states; controls are never nested.
 
 ## Responsive and Accessibility Rules
 

@@ -1,9 +1,9 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'img'>;
+type Props = HTMLAttributes<'img'> & { src: string; alt: string };
 
-const { loading = 'lazy', decoding = 'async', ...props } = Astro.props;
+const { src, alt, loading = 'lazy', decoding = 'async', ...props } = Astro.props;
 ---
 
-<img {...props} loading={loading} decoding={decoding} />
+<img src={src} alt={alt} {...props} loading={loading} decoding={decoding} />

@@ -5,26 +5,51 @@ import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header class="site-header">
-	<a class="site-title" href="/" data-umami-event="Homepage">{site.title}</a>
+	<a class="site-identity" href="/" data-umami-event="Homepage">
+		<span class="site-title">{site.title}</span>
+		<span class="site-tagline">Street by Street, District by District.</span>
+	</a>
 	<ThemeToggle />
 </header>
 
 <style>
 	.site-header {
 		display: flex;
-		max-width: 72rem;
+		max-width: var(--shell-width);
+		min-height: 5rem;
 		align-items: center;
 		justify-content: space-between;
+		gap: 1rem;
 		margin-inline: auto;
-		padding: 1rem 1.5rem;
+		padding: 0.75rem var(--page-gutter);
 		border-bottom: 1px solid var(--color-rule);
 	}
 
-	.site-title {
-		font-size: 0.8125rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
+	.site-identity {
+		display: flex;
+		min-height: 2.75rem;
+		align-items: baseline;
+		gap: clamp(0.75rem, 2vw, 1.5rem);
+		color: var(--color-ink);
 		text-decoration: none;
-		text-transform: uppercase;
+	}
+
+	.site-title {
+		font-size: 1.05rem;
+		font-weight: 720;
+		font-variation-settings: 'wght' 720;
+		letter-spacing: -0.015em;
+	}
+
+	.site-tagline {
+		color: var(--color-muted);
+		font-size: 0.82rem;
+		font-style: italic;
+	}
+
+	@media (max-width: 34rem) {
+		.site-tagline {
+			display: none;
+		}
 	}
 </style>

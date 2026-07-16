@@ -1,0 +1,81 @@
+---
+import '@/styles/global.css';
+
+import PageFooter from '@/components/PageFooter.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import ThemeProvider from '@/components/ThemeProvider.astro';
+import { site as siteConfig } from '@/data/site.ts';
+
+export interface Props {
+	title: string;
+	description: string;
+	canonicalPath?: string;
+	ogType?: 'website' | 'article';
+	image?: string;
+	robots?: string;
+}
+
+const { title, description, canonicalPath, ogType = 'website', image, robots } = Astro.props;
+const canonicalUrl = canonicalPath ? new URL(canonicalPath, Astro.site) : undefined;
+const socialImage = image ? new URL(image, Astro.site) : undefined;
+const serviceWorkerRegistration = `
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/sw.js').catch(function (error) {
+			console.warn('Service worker registration failed:', error);
+		});
+	}
+`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		{robots && <meta name="robots" content={robots} />}
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		<meta property="og:type" content={ogType} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+		{socialImage && <meta property="og:image" content={socialImage} />}
+		<title>{title}</title>
+		<ThemeProvider />
+		{
+			import.meta.env.PROD && (
+				<script
+					is:inline
+					defer
+					src={siteConfig.analytics.endpoint}
+					data-website-id={siteConfig.analytics.websiteId}
+				/>
+			)
+		}
+		{import.meta.env.PROD && <script is:inline set:html={serviceWorkerRegistration} />}
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<PageHeader />
+		<slot />
+		<PageFooter />
+	</body>
+</html>
+
+<style>
+	.skip-link {
+		position: fixed;
+		z-index: 10;
+		top: 1rem;
+		left: 1rem;
+		translate: 0 -200%;
+		background: var(--color-paper);
+		color: var(--color-ink);
+		padding: 0.75rem 1rem;
+	}
+
+	.skip-link:focus {
+		translate: 0;
+	}
+</style>

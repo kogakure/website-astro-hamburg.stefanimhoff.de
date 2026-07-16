@@ -1,0 +1,27 @@
+---
+import { site } from '@/data/site.ts';
+---
+
+<footer class="site-footer">
+	<p>&copy; {new Date().getFullYear()} {site.author}</p>
+	<a href="/imprint/">Imprint</a>
+</footer>
+
+<style>
+	.site-footer {
+		display: flex;
+		max-width: 72rem;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-inline: auto;
+		padding: 1.5rem;
+		border-top: 1px solid var(--color-rule);
+		color: var(--color-muted);
+		font-size: 0.875rem;
+	}
+
+	.site-footer p {
+		margin: 0;
+	}
+</style>

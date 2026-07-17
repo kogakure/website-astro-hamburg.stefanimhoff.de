@@ -17,6 +17,7 @@ describe('field-journal interaction contracts', () => {
 		expect(district).toContain('aria-label="Walk page shortcuts"');
 		expect(district).toContain('href="#main">Back to walk summary');
 		expect(district).toContain('href="/">Return to district atlas');
+		expect(district).toMatch(/\.gallery-recovery a\s*\{[^}]*gap:\s*0\.35rem/s);
 	});
 
 	it('keeps map and imprint links comfortably touchable', () => {
@@ -74,5 +75,11 @@ describe('field-journal interaction contracts', () => {
 		const district = source('src/pages/[slug].astro');
 		expect(district).toMatch(/\.district-reading-grid\s*\{[^}]*container-type:\s*inline-size/s);
 		expect(district).toContain('left: calc(50cqw - max(22rem, 34.615cqw))');
+	});
+
+	it('keeps imprint acknowledgements visibly marked as a list', () => {
+		const imprint = source('src/pages/imprint.astro');
+		expect(imprint).toMatch(/ul\s*\{[^}]*list-style:\s*disc outside/s);
+		expect(imprint).toMatch(/li::marker\s*\{[^}]*color:\s*var\(--color-buoy\)/s);
 	});
 });

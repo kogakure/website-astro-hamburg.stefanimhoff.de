@@ -32,6 +32,8 @@ const { Content } = await render(district);
 const { previous, next } = districtNavigation(districts, district.id);
 const sortedDistricts = sortDistricts(districts);
 const walkIndex = sortedDistricts.findIndex((item) => item.id === district.id) + 1;
+const titleLength = district.data.title.length;
+const titleSize = titleLength >= 14 ? 'extra-long' : titleLength >= 11 ? 'long' : 'regular';
 const canonicalPath = `/${district.id}/`;
 const image = districtHero(district);
 const description = `Photographs, a map, and walking notes from exploring ${district.data.title} in Hamburg.`;
@@ -83,7 +85,7 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 				<p class="walk-position">
 					Walk {String(walkIndex).padStart(2, '0')} of {districts.length}
 				</p>
-				<h1>{district.data.title}</h1>
+				<h1 class:list={[`district-heading--${titleSize}`]}>{district.data.title}</h1>
 				<dl class="route-log">
 					<div><dt>Distance</dt><dd>{district.data.distanceKm} km</dd></div>
 					<div>
@@ -111,19 +113,24 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 				decoding="async"
 			/>
 		</header>
-		<article class="district-content">
-			<Content components={contentComponents} />
-		</article>
-		<nav class="gallery-recovery" aria-label="Walk page shortcuts">
-			<a href="#main">Back to walk summary <span aria-hidden="true">↑</span></a>
-			<a href="/">Return to district atlas</a>
-		</nav>
-		<DistrictNavigation {previous} {next} />
+		<div class="district-reading-grid">
+			<div class="district-reading-column">
+				<article class="district-content">
+					<Content components={contentComponents} />
+				</article>
+				<nav class="gallery-recovery" aria-label="Walk page shortcuts">
+					<a href="#main">Back to walk summary <span aria-hidden="true">↑</span></a>
+					<a href="/">Return to district atlas</a>
+				</nav>
+				<DistrictNavigation {previous} {next} />
+			</div>
+		</div>
 	</main>
 </BaseLayout>
 
 <style>
 	.district-page {
+		--district-columns: minmax(22rem, 0.9fr) minmax(0, 1.7fr);
 		max-width: var(--shell-width);
 		margin-inline: auto;
 		padding: clamp(1.25rem, 3vw, 2rem) var(--page-gutter) clamp(5rem, 10vw, 9rem);
@@ -148,7 +155,9 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 
 	.district-masthead {
 		display: grid;
-		grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.6fr);
+		width: calc(100% + var(--page-gutter) + var(--page-gutter));
+		margin-inline: calc(-1 * var(--page-gutter));
+		grid-template-columns: var(--district-columns);
 		align-items: stretch;
 		border-block: 1px solid var(--color-rule);
 	}
@@ -161,11 +170,31 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		object-position: center;
 	}
 
-	.district-content,
+	.district-reading-grid {
+		display: grid;
+		width: calc(100% + var(--page-gutter) + var(--page-gutter));
+		margin-inline: calc(-1 * var(--page-gutter));
+		grid-template-columns: var(--district-columns);
+		container-type: inline-size;
+	}
+
+	.district-reading-column {
+		width: 100%;
+		min-width: 0;
+		grid-column: 2;
+	}
+
+	.district-content {
+		width: 100%;
+		max-width: none;
+		margin-inline: 0;
+	}
+
 	.gallery-recovery,
 	:global(.district-navigation) {
-		max-width: var(--reading-width);
-		margin-inline: auto;
+		width: min(100%, var(--reading-width));
+		max-width: none;
+		margin-inline: 0;
 	}
 
 	.gallery-recovery {
@@ -202,8 +231,18 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	.district-title h1 {
 		margin-block: auto;
 		padding-block: clamp(3rem, 7vw, 7rem);
-		font-size: clamp(3.2rem, 7.5vw, 6rem);
-		overflow-wrap: anywhere;
+		font-size: clamp(3.2rem, 6.5vw, 5.5rem);
+		overflow-wrap: normal;
+		word-break: normal;
+		hyphens: manual;
+	}
+
+	.district-title h1.district-heading--long {
+		font-size: clamp(2.75rem, 5vw, 4.5rem);
+	}
+
+	.district-title h1.district-heading--extra-long {
+		font-size: clamp(2.5rem, 4.2vw, 3.75rem);
 	}
 
 	.route-log {
@@ -242,7 +281,12 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 	}
 
 	.district-content :global(p) {
+		max-width: var(--reading-width);
 		margin-block: 1.35em;
+	}
+
+	.district-content :global(:where(h2, h3, h4, ul, ol, blockquote, pre, table, .footnotes)) {
+		max-width: var(--reading-width);
 	}
 
 	.district-content :global(a[target='_blank']::after) {
@@ -305,9 +349,29 @@ const contentComponents = { img: ContentImage, a: ContentLink, MapEmbed, YouTube
 		justify-content: center;
 	}
 
+	@media (min-width: 55.001rem) {
+		.district-content :global(img),
+		.district-content :global(.embed) {
+			position: relative;
+			left: calc(50cqw - max(22rem, 34.615cqw));
+			margin-inline: 0;
+			transform: translateX(-50%);
+		}
+	}
+
 	@media (max-width: 55rem) {
+		.district-page {
+			--district-columns: 1fr;
+		}
+
 		.district-masthead {
 			grid-template-columns: 1fr;
+		}
+
+		.district-reading-column {
+			width: auto;
+			margin-inline: var(--page-gutter);
+			grid-column: 1;
 		}
 
 		.district-title {

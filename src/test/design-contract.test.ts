@@ -48,4 +48,31 @@ describe('field-journal interaction contracts', () => {
 		expect(source('src/styles/global.css')).toContain('--reading-width: 60ch');
 		expect(source('src/pages/index.astro')).toContain('max-width: 54ch');
 	});
+
+	it('aligns district mastheads to the outer shell without breaking names mid-word', () => {
+		const district = source('src/pages/[slug].astro');
+		expect(district).toContain('width: calc(100% + var(--page-gutter) + var(--page-gutter))');
+		expect(district).toContain('margin-inline: calc(-1 * var(--page-gutter))');
+		expect(district).toContain("titleLength >= 14 ? 'extra-long'");
+		expect(district).toContain('overflow-wrap: normal');
+		expect(district).not.toContain('overflow-wrap: anywhere');
+	});
+
+	it('aligns the district reading column with the masthead divider', () => {
+		const district = source('src/pages/[slug].astro');
+		expect(district).toContain('--district-columns: minmax(22rem, 0.9fr) minmax(0, 1.7fr)');
+		expect(district).toMatch(/\.district-masthead\s*\{[^}]*var\(--district-columns\)/s);
+		expect(district).toMatch(/\.district-reading-grid\s*\{[^}]*var\(--district-columns\)/s);
+		expect(district).toMatch(/\.district-reading-column\s*\{[^}]*grid-column:\s*2/s);
+		expect(district).toMatch(/\.district-reading-column\s*\{[^}]*width:\s*100%/s);
+		expect(district).toMatch(
+			/\.district-content :global\(p\)\s*\{[^}]*max-width:\s*var\(--reading-width\)/s,
+		);
+	});
+
+	it('centers wide district media against the outer grid container', () => {
+		const district = source('src/pages/[slug].astro');
+		expect(district).toMatch(/\.district-reading-grid\s*\{[^}]*container-type:\s*inline-size/s);
+		expect(district).toContain('left: calc(50cqw - max(22rem, 34.615cqw))');
+	});
 });

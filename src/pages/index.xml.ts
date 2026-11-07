@@ -49,7 +49,7 @@ export const GET: APIRoute = async ({ site }) => {
 	<webfeeds:cover image="${new URL('/assets/images/branding/webfeeds-cover.jpg', base).href}" />
 	<webfeeds:icon>${new URL('/assets/images/branding/webfeeds-icon.png', base).href}</webfeeds:icon>
 	<webfeeds:logo>${new URL('/assets/images/branding/webfeeds-logo.svg', base).href}</webfeeds:logo>
-	<webfeeds:accentColor>2d5da3</webfeeds:accentColor>
+	<webfeeds:accentColor>ff2745</webfeeds:accentColor>
 	<webfeeds:related layout="card" target="browser" />
 	${entries.join('\n\t')}
 </feed>

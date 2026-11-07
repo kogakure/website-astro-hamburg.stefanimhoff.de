@@ -1,0 +1,571 @@
+{
+	"schemaVersion": 2,
+	"generatedAt": "2026-11-07T15:22:10+00:00",
+	"title": "Design System: Exploring Hamburg",
+	"extensions": {
+		"colorMeta": {
+			"wall": {
+				"role": "neutral",
+				"displayName": "Wall (day)",
+				"canonical": "oklch(95.5% 0.005 275)",
+				"tonalRamp": [
+					"oklch(15% 0.005 275)",
+					"oklch(26% 0.005 275)",
+					"oklch(38% 0.005 275)",
+					"oklch(49% 0.005 275)",
+					"oklch(61% 0.005 275)",
+					"oklch(72% 0.005 275)",
+					"oklch(84% 0.005 275)",
+					"oklch(95% 0.005 275)"
+				]
+			},
+			"wall-raised": {
+				"role": "neutral",
+				"displayName": "Raised Wall (day)",
+				"canonical": "oklch(92% 0.007 275)",
+				"tonalRamp": [
+					"oklch(15% 0.007 275)",
+					"oklch(26% 0.007 275)",
+					"oklch(38% 0.007 275)",
+					"oklch(49% 0.007 275)",
+					"oklch(61% 0.007 275)",
+					"oklch(72% 0.007 275)",
+					"oklch(84% 0.007 275)",
+					"oklch(95% 0.007 275)"
+				]
+			},
+			"ink": {
+				"role": "neutral",
+				"displayName": "Ink (day)",
+				"canonical": "oklch(20% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			},
+			"muted": {
+				"role": "neutral",
+				"displayName": "Muted (day)",
+				"canonical": "oklch(45% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			},
+			"glass": {
+				"role": "neutral",
+				"displayName": "Glass (day)",
+				"canonical": "oklch(80% 0.01 275)",
+				"tonalRamp": [
+					"oklch(15% 0.01 275)",
+					"oklch(26% 0.01 275)",
+					"oklch(38% 0.01 275)",
+					"oklch(49% 0.01 275)",
+					"oklch(61% 0.01 275)",
+					"oklch(72% 0.01 275)",
+					"oklch(84% 0.01 275)",
+					"oklch(95% 0.01 275)"
+				]
+			},
+			"unlit": {
+				"role": "neutral",
+				"displayName": "Unlit (day)",
+				"canonical": "oklch(56% 0.015 275)",
+				"tonalRamp": [
+					"oklch(15% 0.015 275)",
+					"oklch(26% 0.015 275)",
+					"oklch(38% 0.015 275)",
+					"oklch(49% 0.015 275)",
+					"oklch(61% 0.015 275)",
+					"oklch(72% 0.015 275)",
+					"oklch(84% 0.015 275)",
+					"oklch(95% 0.015 275)"
+				]
+			},
+			"focus": {
+				"role": "primary",
+				"displayName": "Focus (day)",
+				"canonical": "oklch(52% 0.22 25)",
+				"tonalRamp": [
+					"oklch(15% 0.22 25)",
+					"oklch(26% 0.22 25)",
+					"oklch(38% 0.22 25)",
+					"oklch(49% 0.22 25)",
+					"oklch(61% 0.22 25)",
+					"oklch(72% 0.22 25)",
+					"oklch(84% 0.22 25)",
+					"oklch(95% 0.22 25)"
+				]
+			},
+			"tube-red": {
+				"role": "primary",
+				"displayName": "Kiez Red (day)",
+				"canonical": "oklch(52% 0.22 25)",
+				"tonalRamp": [
+					"oklch(15% 0.22 25)",
+					"oklch(26% 0.22 25)",
+					"oklch(38% 0.22 25)",
+					"oklch(49% 0.22 25)",
+					"oklch(61% 0.22 25)",
+					"oklch(72% 0.22 25)",
+					"oklch(84% 0.22 25)",
+					"oklch(95% 0.22 25)"
+				]
+			},
+			"tube-blue": {
+				"role": "secondary",
+				"displayName": "Argon Blue (day)",
+				"canonical": "oklch(48% 0.16 250)",
+				"tonalRamp": [
+					"oklch(15% 0.16 250)",
+					"oklch(26% 0.16 250)",
+					"oklch(38% 0.16 250)",
+					"oklch(49% 0.16 250)",
+					"oklch(61% 0.16 250)",
+					"oklch(72% 0.16 250)",
+					"oklch(84% 0.16 250)",
+					"oklch(95% 0.16 250)"
+				]
+			},
+			"tube-white": {
+				"role": "tertiary",
+				"displayName": "Warm White (day)",
+				"canonical": "oklch(52% 0.14 62)",
+				"tonalRamp": [
+					"oklch(15% 0.14 62)",
+					"oklch(26% 0.14 62)",
+					"oklch(38% 0.14 62)",
+					"oklch(49% 0.14 62)",
+					"oklch(61% 0.14 62)",
+					"oklch(72% 0.14 62)",
+					"oklch(84% 0.14 62)",
+					"oklch(95% 0.14 62)"
+				]
+			},
+			"night-wall": {
+				"role": "neutral",
+				"displayName": "Wall (night)",
+				"canonical": "oklch(13% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			},
+			"night-wall-raised": {
+				"role": "neutral",
+				"displayName": "Raised Wall (night)",
+				"canonical": "oklch(17% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			},
+			"night-ink": {
+				"role": "neutral",
+				"displayName": "Ink (night)",
+				"canonical": "oklch(91% 0.01 275)",
+				"tonalRamp": [
+					"oklch(15% 0.01 275)",
+					"oklch(26% 0.01 275)",
+					"oklch(38% 0.01 275)",
+					"oklch(49% 0.01 275)",
+					"oklch(61% 0.01 275)",
+					"oklch(72% 0.01 275)",
+					"oklch(84% 0.01 275)",
+					"oklch(95% 0.01 275)"
+				]
+			},
+			"night-muted": {
+				"role": "neutral",
+				"displayName": "Muted (night)",
+				"canonical": "oklch(72% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			},
+			"night-glass": {
+				"role": "neutral",
+				"displayName": "Glass (night)",
+				"canonical": "oklch(34% 0.015 275)",
+				"tonalRamp": [
+					"oklch(15% 0.015 275)",
+					"oklch(26% 0.015 275)",
+					"oklch(38% 0.015 275)",
+					"oklch(49% 0.015 275)",
+					"oklch(61% 0.015 275)",
+					"oklch(72% 0.015 275)",
+					"oklch(84% 0.015 275)",
+					"oklch(95% 0.015 275)"
+				]
+			},
+			"night-unlit": {
+				"role": "neutral",
+				"displayName": "Unlit (night)",
+				"canonical": "oklch(58% 0.015 275)",
+				"tonalRamp": [
+					"oklch(15% 0.015 275)",
+					"oklch(26% 0.015 275)",
+					"oklch(38% 0.015 275)",
+					"oklch(49% 0.015 275)",
+					"oklch(61% 0.015 275)",
+					"oklch(72% 0.015 275)",
+					"oklch(84% 0.015 275)",
+					"oklch(95% 0.015 275)"
+				]
+			},
+			"night-focus": {
+				"role": "primary",
+				"displayName": "Focus (night)",
+				"canonical": "oklch(93% 0.07 88)",
+				"tonalRamp": [
+					"oklch(15% 0.07 88)",
+					"oklch(26% 0.07 88)",
+					"oklch(38% 0.07 88)",
+					"oklch(49% 0.07 88)",
+					"oklch(61% 0.07 88)",
+					"oklch(72% 0.07 88)",
+					"oklch(84% 0.07 88)",
+					"oklch(95% 0.07 88)"
+				]
+			},
+			"night-tube-red": {
+				"role": "primary",
+				"displayName": "Kiez Red (night)",
+				"canonical": "oklch(66% 0.25 22)",
+				"tonalRamp": [
+					"oklch(15% 0.25 22)",
+					"oklch(26% 0.25 22)",
+					"oklch(38% 0.25 22)",
+					"oklch(49% 0.25 22)",
+					"oklch(61% 0.25 22)",
+					"oklch(72% 0.25 22)",
+					"oklch(84% 0.25 22)",
+					"oklch(95% 0.25 22)"
+				]
+			},
+			"night-tube-blue": {
+				"role": "secondary",
+				"displayName": "Argon Blue (night)",
+				"canonical": "oklch(72% 0.16 245)",
+				"tonalRamp": [
+					"oklch(15% 0.16 245)",
+					"oklch(26% 0.16 245)",
+					"oklch(38% 0.16 245)",
+					"oklch(49% 0.16 245)",
+					"oklch(61% 0.16 245)",
+					"oklch(72% 0.16 245)",
+					"oklch(84% 0.16 245)",
+					"oklch(95% 0.16 245)"
+				]
+			},
+			"night-tube-white": {
+				"role": "tertiary",
+				"displayName": "Warm White (night)",
+				"canonical": "oklch(93% 0.07 88)",
+				"tonalRamp": [
+					"oklch(15% 0.07 88)",
+					"oklch(26% 0.07 88)",
+					"oklch(38% 0.07 88)",
+					"oklch(49% 0.07 88)",
+					"oklch(61% 0.07 88)",
+					"oklch(72% 0.07 88)",
+					"oklch(84% 0.07 88)",
+					"oklch(95% 0.07 88)"
+				]
+			},
+			"manifest-wall": {
+				"role": "neutral",
+				"displayName": "Manifest Wall (night, sRGB)",
+				"canonical": "oklch(13% 0.02 275)",
+				"tonalRamp": [
+					"oklch(15% 0.02 275)",
+					"oklch(26% 0.02 275)",
+					"oklch(38% 0.02 275)",
+					"oklch(49% 0.02 275)",
+					"oklch(61% 0.02 275)",
+					"oklch(72% 0.02 275)",
+					"oklch(84% 0.02 275)",
+					"oklch(95% 0.02 275)"
+				]
+			}
+		},
+		"typographyMeta": {
+			"display": {
+				"displayName": "Display",
+				"purpose": "Homepage sign only."
+			},
+			"headline": {
+				"displayName": "Headline",
+				"purpose": "District, imprint and 404 sign headings."
+			},
+			"sign-name": {
+				"displayName": "Sign Name",
+				"purpose": "Atlas district names."
+			},
+			"motto": {
+				"displayName": "Motto",
+				"purpose": "Warm-white motto and atlas window caption."
+			},
+			"meter": {
+				"displayName": "Meter",
+				"purpose": "Lit walk-record numerals."
+			},
+			"title": {
+				"displayName": "Title",
+				"purpose": "Grotesk section headings."
+			},
+			"wordmark": {
+				"displayName": "Wordmark",
+				"purpose": "Header site title."
+			},
+			"body": {
+				"displayName": "Body",
+				"purpose": "Interface and intro prose."
+			},
+			"reading": {
+				"displayName": "Reading",
+				"purpose": "Walk prose at 62ch."
+			},
+			"label": {
+				"displayName": "Label",
+				"purpose": "Terms, log lines, breadcrumbs, captions."
+			},
+			"caption": {
+				"displayName": "Caption",
+				"purpose": "Header tagline."
+			}
+		},
+		"shadows": [
+			{
+				"name": "tube-glow",
+				"value": "text-shadow: 0 0 0.04em var(--tube), 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.55), 0 0 1.4em oklch(from var(--tube) l c h / 0.35)",
+				"purpose": "Every lit sign and lit district name, night only; letters lifted to l + 0.2, chroma halved."
+			},
+			{
+				"name": "tube-glow-soft",
+				"value": "text-shadow: 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.5)",
+				"purpose": "Lit prev/next signs at night; letters lifted only l + 0.05."
+			},
+			{
+				"name": "window-glow",
+				"value": "box-shadow: 0 0 0 1px oklch(from var(--tube) l c h / 0.6), 0 0 3rem oklch(from var(--tube) l c h / 0.28), 0 30px 60px -30px oklch(0% 0 0 / 0.85)",
+				"purpose": "Atlas photo window at night, tinted by the lit tube."
+			},
+			{
+				"name": "photo-drop",
+				"value": "box-shadow: 0 30px 60px -30px oklch(0% 0 0 / 0.85)",
+				"purpose": "Walk photographs at night."
+			},
+			{
+				"name": "toggle-halo",
+				"value": "box-shadow: 0 0 0.9rem oklch(from var(--tube-white) l c h / 0.35)",
+				"purpose": "Theme toggle hover at night."
+			}
+		],
+		"motion": [
+			{
+				"name": "ease-out",
+				"value": "cubic-bezier(0.22, 1, 0.36, 1)",
+				"purpose": "Link colour and underline transitions (160ms)."
+			},
+			{
+				"name": "ignite",
+				"value": "1.3s steps(1, end) 150ms both; glow off/on at 0/14/19/32/36/46%",
+				"purpose": "Sign headings stutter on once; only text-shadow changes. Inert by day (no glow) and under reduced motion."
+			},
+			{
+				"name": "tube-snap",
+				"value": "120ms steps(2, end)",
+				"purpose": "District names and nav signs switching between unlit and lit."
+			},
+			{
+				"name": "window-snap",
+				"value": "200ms steps(2, end)",
+				"purpose": "Atlas window glow retinting at night."
+			},
+			{
+				"name": "control",
+				"value": "160ms ease",
+				"purpose": "Theme toggle ring, colour, press scale 0.96; icon rotation 200ms."
+			},
+			{
+				"name": "reduced-motion",
+				"value": "animation and transition 0.01ms, smooth scroll off",
+				"purpose": "Global prefers-reduced-motion collapse."
+			}
+		],
+		"breakpoints": [
+			{
+				"name": "narrow",
+				"value": "34rem"
+			},
+			{
+				"name": "footer-stack",
+				"value": "35rem"
+			},
+			{
+				"name": "atlas",
+				"value": "56rem / 56.0625rem with hover: hover"
+			}
+		]
+	},
+	"components": [
+		{
+			"name": "Tube Sign",
+			"kind": "custom",
+			"refersTo": "tube-sign",
+			"description": "Tilt Neon sign lettering in one of three tubes; flat glass by day, lifted core plus glow at night, ignites once by flickering only the glow.",
+			"html": "<h1 class=\"ds-tube ds-ignite\">Exploring Hamburg</h1><p class=\"ds-tube ds-tube--white ds-motto\">Street by Street, District by District.</p>",
+			"css": ".ds-tube { --tube: var(--tube-red, oklch(52% 0.22 25)); color: var(--tube); font-family: var(--font-neon, 'Tilt Neon', sans-serif); font-weight: 400; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; letter-spacing: 0; margin: 0; } .ds-tube--white { --tube: var(--tube-white, oklch(52% 0.14 62)); } .ds-motto { font-size: clamp(1.4rem, 3vw, 2.4rem); line-height: 1.2; margin-top: 0.75rem; } :host-context([data-theme='dark']) .ds-tube, [data-theme='dark'] .ds-tube { --tube-glow: 0 0 0.04em var(--tube), 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.55), 0 0 1.4em oklch(from var(--tube) l c h / 0.35); color: oklch(from var(--tube) calc(l + 0.2) calc(c * 0.5) h); text-shadow: var(--tube-glow); } .ds-ignite { animation: ds-ignite 1.3s steps(1, end) 150ms both; } @keyframes ds-ignite { 0% { text-shadow: none; } 14% { text-shadow: var(--tube-glow, none); } 19% { text-shadow: none; } 32% { text-shadow: var(--tube-glow, none); } 36% { text-shadow: none; } 46%, 100% { text-shadow: var(--tube-glow, none); } } @media (prefers-reduced-motion: reduce) { .ds-ignite { animation-duration: 0.01ms; } }"
+		},
+		{
+			"name": "District Atlas Row",
+			"kind": "card",
+			"refersTo": "district-card",
+			"description": "A list row on a hairline: an unlit Tilt Neon name that snaps to its tube colour on hover, focus, or centre-crossing on touch, with a tabular log line.",
+			"html": "<ol class=\"ds-atlas\"><li><a class=\"ds-row\" href=\"#\"><span class=\"ds-name\">Altona-Altstadt</span><span class=\"ds-log\">Mar 2024 · 14.2 km · 3 h 20 min</span></a></li><li><a class=\"ds-row ds-row--blue\" href=\"#\"><span class=\"ds-name\">Barmbek-Nord</span><span class=\"ds-log\">Jun 2024 · 11.8 km · 2 h 45 min</span></a></li><li><a class=\"ds-row ds-row--white\" href=\"#\"><span class=\"ds-name\">Eimsbüttel</span><span class=\"ds-log\">Sep 2024 · 12.5 km · 3 h 05 min</span></a></li></ol>",
+			"css": ".ds-atlas { margin: 0; padding: 0; list-style: none; } .ds-atlas li { border-bottom: 1px solid color-mix(in oklch, var(--color-glass, oklch(80% 0.01 275)) 60%, transparent); } .ds-row { --tube: var(--tube-red, oklch(52% 0.22 25)); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 0.25rem 1.5rem; padding-block: 0.35rem; color: var(--color-ink, oklch(20% 0.02 275)); text-decoration: none; } .ds-row--blue { --tube: var(--tube-blue, oklch(48% 0.16 250)); } .ds-row--white { --tube: var(--tube-white, oklch(52% 0.14 62)); } .ds-name { color: oklch(from var(--tube) var(--unlit-l, 0.56) 0.03 h); font-family: var(--font-neon, 'Tilt Neon', sans-serif); font-size: clamp(2rem, 6vw, 4rem); line-height: 1.1; transition: color 120ms steps(2, end), text-shadow 120ms steps(2, end); } .ds-row:hover .ds-name, .ds-row:focus-visible .ds-name { color: var(--tube); } [data-theme='dark'] .ds-row:hover .ds-name, [data-theme='dark'] .ds-row:focus-visible .ds-name { color: oklch(from var(--tube) calc(l + 0.2) calc(c * 0.5) h); text-shadow: 0 0 0.04em var(--tube), 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.55), 0 0 1.4em oklch(from var(--tube) l c h / 0.35); } .ds-log { color: var(--color-muted, oklch(45% 0.02 275)); font-family: var(--font-body, sans-serif); font-size: 0.875rem; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-row:hover .ds-log, .ds-row:focus-visible .ds-log { color: var(--color-ink, oklch(20% 0.02 275)); } .ds-row:focus-visible { outline: 0.1875rem solid var(--color-focus, oklch(52% 0.22 25)); outline-offset: 0.25rem; }"
+		},
+		{
+			"name": "Unwalked Tubes",
+			"kind": "custom",
+			"refersTo": "district-card",
+			"description": "One empty pill per unwalked district: the record accumulating as dark glass.",
+			"html": "<p class=\"ds-dark-label\">89 districts are still dark.</p><ol class=\"ds-dark\" aria-hidden=\"true\"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ol>",
+			"css": ".ds-dark-label { margin: 0 0 1rem; color: var(--color-muted, oklch(45% 0.02 275)); font-family: var(--font-body, sans-serif); } .ds-dark { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; } .ds-dark li { width: 2.6rem; height: 0.55rem; border: 1.5px solid var(--color-unlit, oklch(56% 0.015 275)); border-radius: 1rem; }"
+		},
+		{
+			"name": "Meters",
+			"kind": "custom",
+			"refersTo": "meter",
+			"description": "Walk-record statistics as blue tube numerals on hairline rows.",
+			"html": "<dl class=\"ds-meters\"><div><dt>Distance walked</dt><dd><strong class=\"ds-meter\">280</strong><span>km</span></dd></div><div><dt>Time on foot</dt><dd><strong class=\"ds-meter\">65</strong><span>hours</span></dd></div><div><dt>Districts walked</dt><dd><strong class=\"ds-meter\">20</strong><span>of 109</span></dd></div></dl>",
+			"css": ".ds-meters { margin: 0; font-family: var(--font-body, sans-serif); } .ds-meters div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-block: 0.6rem; border-bottom: 1px solid var(--color-glass, oklch(80% 0.01 275)); } .ds-meters dt { color: var(--color-muted, oklch(45% 0.02 275)); font-weight: 500; } .ds-meters dd { display: flex; align-items: baseline; gap: 0.4rem; margin: 0; } .ds-meters dd span { color: var(--color-muted, oklch(45% 0.02 275)); font-size: 0.875rem; } .ds-meter { --tube: var(--tube-blue, oklch(48% 0.16 250)); color: var(--tube); font-family: var(--font-neon, 'Tilt Neon', sans-serif); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; font-variant-numeric: tabular-nums; } [data-theme='dark'] .ds-meter { color: oklch(from var(--tube) calc(l + 0.2) calc(c * 0.5) h); text-shadow: 0 0 0.04em var(--tube), 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.55), 0 0 1.4em oklch(from var(--tube) l c h / 0.35); }"
+		},
+		{
+			"name": "Prev/Next District Navigation",
+			"kind": "nav",
+			"refersTo": "district-nav-link",
+			"description": "Two warm-white signs that rest unlit and light with the soft glow on hover or focus.",
+			"html": "<nav class=\"ds-dnav\" aria-label=\"District walks\"><a href=\"#\" rel=\"prev\"><span>Previous walk</span><strong>Altona-Nord</strong></a><a class=\"ds-next\" href=\"#\" rel=\"next\"><span>Next walk</span><strong>Bahrenfeld</strong></a></nav>",
+			"css": ".ds-dnav { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 4vw, 3rem); font-family: var(--font-body, sans-serif); } .ds-dnav a { display: flex; min-height: 4.5rem; flex-direction: column; justify-content: center; color: var(--color-ink, oklch(20% 0.02 275)); text-decoration: none; } .ds-dnav span { color: var(--color-muted, oklch(45% 0.02 275)); font-size: 0.875rem; } .ds-dnav strong { --tube: var(--tube-white, oklch(52% 0.14 62)); color: oklch(from var(--tube) var(--unlit-l, 0.56) 0.03 h); font-family: var(--font-neon, 'Tilt Neon', sans-serif); font-size: clamp(1.8rem, 4.5vw, 3.4rem); font-weight: 400; line-height: 1.1; transition: color 120ms steps(2, end), text-shadow 120ms steps(2, end); } .ds-dnav a:hover strong, .ds-dnav a:focus-visible strong { color: var(--tube); } [data-theme='dark'] .ds-dnav a:hover strong, [data-theme='dark'] .ds-dnav a:focus-visible strong { color: oklch(from var(--tube) calc(l + 0.05) calc(c * 0.5) h); text-shadow: 0 0 0.18em var(--tube), 0 0 0.6em oklch(from var(--tube) l c h / 0.5); } .ds-dnav a:focus-visible { outline: 0.1875rem solid var(--color-focus, oklch(52% 0.22 25)); outline-offset: 0.25rem; } .ds-next { text-align: right; }"
+		},
+		{
+			"name": "Site Header",
+			"kind": "nav",
+			"refersTo": "site-header",
+			"description": "Wordmark plus caption tagline on the left, round theme toggle on the right; nothing else.",
+			"html": "<header class=\"ds-header\"><a class=\"ds-identity\" href=\"#\"><span class=\"ds-title\">Exploring Hamburg</span><span class=\"ds-tagline\">Street by Street, District by District.</span></a><button class=\"ds-toggle\" type=\"button\" aria-label=\"Switch theme\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\"><path d=\"M12 3a9 9 0 1 0 0 18V3Z\" fill=\"currentColor\"></path><circle cx=\"12\" cy=\"12\" r=\"8.25\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"></circle></svg></button></header>",
+			"css": ".ds-header { display: flex; min-height: 4.5rem; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem var(--page-gutter, 1.5rem); font-family: var(--font-body, sans-serif); } .ds-identity { display: flex; min-height: 2.75rem; align-items: baseline; gap: clamp(0.75rem, 2vw, 1.5rem); color: var(--color-ink, oklch(20% 0.02 275)); text-decoration: none; } .ds-title { font-size: 1.05rem; font-weight: 750; letter-spacing: -0.01em; } .ds-identity:hover .ds-title { color: var(--tube-red, oklch(52% 0.22 25)); } .ds-tagline { color: var(--color-muted, oklch(45% 0.02 275)); font-size: 0.8rem; } .ds-toggle { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-glass, oklch(80% 0.01 275)); border-radius: 50%; background: transparent; color: var(--color-ink, oklch(20% 0.02 275)); cursor: pointer; transition: border-color 160ms ease, color 160ms ease, transform 160ms ease; } .ds-toggle:hover { border-color: var(--tube-white, oklch(52% 0.14 62)); color: var(--tube-white, oklch(52% 0.14 62)); } [data-theme='dark'] .ds-toggle:hover { box-shadow: 0 0 0.9rem oklch(from var(--tube-white) l c h / 0.35); } .ds-toggle:active { transform: scale(0.96); } .ds-toggle svg { transition: transform 200ms ease; } [data-theme='dark'] .ds-toggle svg { transform: rotate(180deg); } .ds-identity:focus-visible, .ds-toggle:focus-visible { outline: 0.1875rem solid var(--color-focus, oklch(52% 0.22 25)); outline-offset: 0.25rem; }"
+		},
+		{
+			"name": "Embed Figure",
+			"kind": "custom",
+			"refersTo": "embed",
+			"description": "Map or video iframe in a square glass frame with a fallback link caption at touch height.",
+			"html": "<figure class=\"ds-embed\"><div class=\"ds-frame\" role=\"img\" aria-label=\"Map of the district walk\"></div><figcaption><a href=\"#\">Open this route in Google Maps</a></figcaption></figure>",
+			"css": ".ds-embed { margin: 0; font-family: var(--font-body, sans-serif); } .ds-frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--color-glass, oklch(80% 0.01 275)); background: var(--color-wall-raised, oklch(92% 0.007 275)); } .ds-embed figcaption { margin-top: 0.65rem; color: var(--color-muted, oklch(45% 0.02 275)); font-size: 0.875rem; } .ds-embed a { display: inline-flex; min-height: 2.75rem; align-items: center; color: inherit; text-decoration-color: color-mix(in oklch, currentColor 45%, transparent); text-decoration-thickness: 0.075em; text-underline-offset: 0.2em; transition: text-decoration-color 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-embed a:hover { text-decoration-color: currentColor; } .ds-embed a:focus-visible { outline: 0.1875rem solid var(--color-focus, oklch(52% 0.22 25)); outline-offset: 0.25rem; }"
+		},
+		{
+			"name": "Route Log",
+			"kind": "custom",
+			"refersTo": "masthead",
+			"description": "District masthead data under the lit name: tabular values over muted terms, closed by a glass rule, always on solid wall.",
+			"html": "<dl class=\"ds-route\"><div><dt>Distance</dt><dd>14.2 km</dd></div><div><dt>Walking time</dt><dd>3 h 20 min</dd></div><div><dt>Recorded</dt><dd>Mar 2024</dd></div></dl>",
+			"css": ".ds-route { display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; margin: 1.25rem 0 0; padding-bottom: clamp(1.5rem, 3vw, 2.5rem); border-bottom: 1px solid var(--color-glass, oklch(80% 0.01 275)); font-family: var(--font-body, sans-serif); } .ds-route div { display: flex; flex-direction: column-reverse; } .ds-route dt { color: var(--color-muted, oklch(45% 0.02 275)); font-size: 0.875rem; } .ds-route dd { margin: 0; font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--color-ink, oklch(20% 0.02 275)); }"
+		}
+	],
+	"narrative": {
+		"northStar": "Kiez Neon",
+		"overview": "**Creative North Star: \"Kiez Neon\"**\n\nSt. Pauli sign-shop neon on a wall. The archive is a wall of tube signs: every walked district is a name in bent glass, and pointing at it switches the gas on. The 89 districts not yet walked stand as dark, empty tubes, so the record visibly accumulates. Photographs carry the atmosphere; the signage carries orientation. Reading happens in a plain grotesk on the bare wall, never on top of a photograph.\n\nThe system has two states of one object. Day (light theme) is the sign by daylight: tubes off, full-chroma coloured glass on a pale blue-grey wall, no glow, nothing moves. Night (dark theme) is the same sign switched on: a near-black blue wall, each tube a pale core inside a two-layer halo. Both themes are first-class and both must pass axe.\n\nDensity is low and vertical: huge stacked names, hairline rules, generous section spacing. There are no cards, no rounded panels, and no glassmorphism. The one photograph above the fold is the harbour behind the homepage sign, veiled and fading into the wall before any small text. Depth comes from light (glow) and the photographs themselves, not from surfaces.",
+		"keyCharacteristics": [
+			"Exactly three tube gases: red, argon blue, warm white.",
+			"Tilt Neon only for lettering that is a sign; Schibsted Grotesk for reading and data.",
+			"Unlit is a real state: names sit as dim glass until pointed at, focused, or (on touch) crossing the screen centre.",
+			"Thin glass hairlines (1px) structure everything; corners are square.",
+			"Small text never sits on a photograph."
+		],
+		"rules": [
+			{
+				"name": "The Three Gases Rule",
+				"body": "There are exactly three tube colours: red, blue, warm white. Never add a fourth tube colour, a gradient tube, or a tint outside them. New signs choose one of the three via the tube variable.",
+				"section": "colors"
+			},
+			{
+				"name": "The Glass By Day, Gas By Night Rule",
+				"body": "By day a lit tube shows its glass colour flat, with no shadow. At night a lit tube's letters are lifted (lightness +0.2, chroma halved) and wrapped in the glow. Never add glow in the day theme.",
+				"section": "colors"
+			},
+			{
+				"name": "The Rotation Rule",
+				"body": "District names cycle red, blue, white in alphabetical order (index mod 3); a district page's heading uses its walk's position in the same cycle, so a district keeps one colour across the atlas, the photo window, and its own page.",
+				"section": "colors"
+			},
+			{
+				"name": "The Lettering Is A Sign Rule",
+				"body": "Tilt Neon appears only on elements that are a tube (sign, district names, motto, meters, prev/next, window caption). Never set paragraphs, labels, or buttons in it, and never set a sign in Schibsted.",
+				"section": "typography"
+			},
+			{
+				"name": "The Tabular Record Rule",
+				"body": "Every number that belongs to the walk record (km, hours, minutes, counts, walk position) uses tabular numerals.",
+				"section": "typography"
+			},
+			{
+				"name": "The Light Is The Only Lift Rule",
+				"body": "Never raise a surface with a panel shadow, blur, or backdrop filter. If something needs emphasis, it is lit.",
+				"section": "elevation"
+			}
+		],
+		"dos": [
+			"**Do** pick every accent from the three tubes and set it through the tube variable so day, night, glow, and unlit derive automatically.",
+			"**Do** keep small text (labels, captions, body, meta) on the bare wall; only display-size tube lettering may overlap a photograph, and only behind a veil or masthead gradient. The header's wordmark and toggle sit over the strongest part of the homepage veil (85% wall by day, 80% at night).",
+			"**Do** flicker only the glow (text-shadow) when a sign ignites, once, in steps; letters stay at full contrast.",
+			"**Do** keep both themes legible and axe-clean; at night the focus ring is warm white, by day tube red (0.1875rem solid, 0.25rem offset).",
+			"**Do** give every standalone link and control at least 2.75rem of height and honour reduced motion by collapsing animation and transition.",
+			"**Do** separate sections and rows with 1px glass hairlines and keep corners square.",
+			"**Do** use tabular numerals for every walk-record number."
+		],
+		"donts": [
+			"**Don't** add a fourth tube colour, a gradient tube, or a decorative accent outside red, argon blue, and warm white.",
+			"**Don't** put small text over photographs, and don't replace the sticky atlas window with a full-screen photo flood.",
+			"**Don't** animate text opacity or colour to fake flicker; no looping or repeating flicker.",
+			"**Don't** add glow, shadow, or motion to the day theme.",
+			"**Don't** use Tilt Neon for reading text, labels, or controls, or set a sign in the grotesk.",
+			"**Don't** introduce cards, rounded panels, glassmorphism, backdrop blur, or an interchangeable card grid.",
+			"**Don't** let the homepage harbour photo reach the intro or meters, or add navigation links to the header beyond wordmark and toggle.",
+			"**Don't** add kickers or eyebrow labels above headings, glyph or emoji icons, or nautical costume (anchors, ship wheels, rope borders, faux-vintage decoration)."
+		]
+	}
+}

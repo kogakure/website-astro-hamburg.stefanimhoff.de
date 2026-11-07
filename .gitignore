@@ -12,5 +12,8 @@ test-results
 # Local Impeccable browser critiques
 .impeccable/critique/*.md
 
+# Local Impeccable review screenshots
+.impeccable/review/
+
 # Local design prototypes (not shipped)
 _prototypes/

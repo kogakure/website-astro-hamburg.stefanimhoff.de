@@ -3,10 +3,12 @@ import { getCollection } from 'astro:content';
 
 import DistrictCard from '@/components/DistrictCard.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { districtTotals, sortDistricts } from '@/lib/districts.ts';
+import { districtHero, districtTotals, sortDistricts } from '@/lib/districts.ts';
 
 const districts = sortDistricts(await getCollection('districts'));
 const totals = districtTotals(districts);
+const totalDistricts = 109;
+const unwalked = totalDistricts - districts.length;
 const description =
 	'Walking through the districts of Hamburg: photographs, maps, and notes from exploring the city on foot.';
 const structuredData = {
@@ -20,278 +22,404 @@ const structuredData = {
 
 <BaseLayout title="Exploring Hamburg" {description} canonicalPath="/" {structuredData}>
 	<main id="main">
-		<section class="homepage-hero" aria-labelledby="homepage-title">
-			<img
-				sizes="(max-width: 1200px) 100vw, 1200px"
-				srcset="/assets/images/core/homepage-hero-300.jpg 300w, /assets/images/core/homepage-hero-600.jpg 600w, /assets/images/core/homepage-hero-1200.jpg 1200w, /assets/images/core/homepage-hero.jpg 1800w"
-				src="/assets/images/core/homepage-hero.jpg"
-				alt="Red lightship and boats in Hamburg harbor"
-				fetchpriority="high"
-				decoding="async"
-			/>
-			<div class="hero-title">
-				<h1 id="homepage-title">Exploring Hamburg</h1>
-				<p>Street by Street, District by District.</p>
-			</div>
-		</section>
-
-		<section class="project-intro" aria-labelledby="about-title">
-			<h2 id="about-title">A city learned on foot</h2>
-			<div class="intro-copy">
-				<p>
-					After living in Hamburg for more than 10 years, and still only knowing a small
-					part of the city, I decided in 2015 to explore every district completely.
-				</p>
-				<p>
-					I travel with my camera and a map all 109 districts of Hamburg – as complete as
-					possible, mostly by foot.
-				</p>
-			</div>
-		</section>
-
-		<section class="walk-record" aria-labelledby="statistics-title">
-			<div class="map-field">
-				<img
-					sizes="(max-width: 1200px) 100vw, 1200px"
-					srcset="/assets/images/core/map-300.jpg 300w, /assets/images/core/map-600.jpg 600w, /assets/images/core/map-1200.jpg 1200w, /assets/images/core/map.jpg 1800w"
-					src="/assets/images/core/map.jpg"
-					alt="Historical map of Hamburg and the Elbe"
-					loading="lazy"
-					decoding="async"
-				/>
-			</div>
+		<div class="opening">
+			<section class="sign" aria-labelledby="homepage-title">
+				<div class="sign-backdrop">
+					<img
+						sizes="100vw"
+						srcset="/assets/images/core/homepage-hero-600.jpg 600w, /assets/images/core/homepage-hero-1200.jpg 1200w, /assets/images/core/homepage-hero.jpg 1800w"
+						src="/assets/images/core/homepage-hero.jpg"
+						alt="Red lightship and boats in Hamburg harbor"
+						fetchpriority="high"
+						decoding="async"
+					/>
+				</div>
+				<h1 id="homepage-title" class="tube ignite">
+					<span>Exploring</span>
+					<span>Hamburg</span>
+				</h1>
+				<p class="motto tube tube--white">Street by Street, District by District.</p>
+			</section>
 			<div class="ledger">
-				<h2 id="statistics-title">Walk record</h2>
-				<p>A running log of the published routes.</p>
-				<dl class="statistics">
-					<div>
-						<dt>Distance walked</dt><dd>
-							<strong>{totals.distanceKm}</strong>
-							<span>km</span>
-						</dd>
+				<section class="project-intro" aria-labelledby="about-title">
+					<h2 id="about-title">A city learned on foot</h2>
+					<div class="intro-copy">
+						<p>
+							After living in Hamburg for more than 10 years, and still only knowing a
+							small part of the city, I decided in 2015 to explore every district
+							completely.
+						</p>
+						<p>
+							I travel with my camera and a map all 109 districts of Hamburg – as
+							complete as possible, mostly by foot.
+						</p>
 					</div>
-					<div>
-						<dt>Time on foot</dt><dd>
-							<strong>{totals.durationHours}</strong>
-							<span>hours</span>
-						</dd>
-					</div>
-					<div>
-						<dt>District walks</dt><dd>
-							<strong>{totals.count}</strong>
-							<span>published</span>
-						</dd>
-					</div>
-				</dl>
+				</section>
+
+				<section class="walk-record" aria-labelledby="statistics-title">
+					<h2 id="statistics-title">Walk record</h2>
+					<p>A running log of the published routes.</p>
+					<dl class="meters">
+						<div>
+							<dt>Distance walked</dt>
+							<dd>
+								<strong class="tube tube--blue">{totals.distanceKm}</strong><span
+									>km</span
+								>
+							</dd>
+						</div>
+						<div>
+							<dt>Time on foot</dt>
+							<dd>
+								<strong class="tube tube--blue">{totals.durationHours}</strong><span
+									>hours</span
+								>
+							</dd>
+						</div>
+						<div>
+							<dt>District walks</dt>
+							<dd>
+								<strong class="tube tube--blue">{totals.count}</strong><span
+									>of {totalDistricts}</span
+								>
+							</dd>
+						</div>
+					</dl>
+				</section>
 			</div>
-		</section>
+		</div>
 
 		<section class="districts" aria-labelledby="districts-title">
 			<header class="districts-heading">
 				<h2 id="districts-title">District atlas</h2>
-				<p>{districts.length} published walks, ordered alphabetically.</p>
+				<p>
+					{districts.length} published walks, ordered alphabetically.{' '}
+					<span class="pointer-hint">Point at a name to switch it on.</span>
+				</p>
 			</header>
-			<ol class="district-index">
-				{districts.map((district, index) => <DistrictCard {district} {index} />)}
-			</ol>
+			<div class="atlas">
+				<ol class="district-index">
+					{districts.map((district, index) => <DistrictCard {district} {index} />)}
+				</ol>
+				<figure class="atlas-window" aria-hidden="true">
+					<img
+						src={districtHero(districts[0])}
+						alt=""
+						width="1280"
+						height="960"
+						loading="lazy"
+						decoding="async"
+					/>
+					<figcaption class="tube tube--red">{districts[0].data.title}</figcaption>
+				</figure>
+			</div>
+
+			<div class="unlit">
+				<p>{unwalked} districts are still dark.</p>
+				<ol aria-hidden="true">
+					{Array.from({ length: unwalked }, () => <li />)}
+				</ol>
+			</div>
 		</section>
 	</main>
 </BaseLayout>
 
+<script>
+	const windowImage = document.querySelector<HTMLImageElement>('.atlas-window img');
+	const windowCaption = document.querySelector<HTMLElement>('.atlas-window figcaption');
+	const links = [...document.querySelectorAll<HTMLAnchorElement>('.district-card > a')];
+	const tubes = ['tube-red', 'tube-blue', 'tube-white'];
+
+	function light(link: HTMLAnchorElement) {
+		if (!windowImage || !windowCaption) return;
+		const source = link.dataset.backdrop;
+		if (!source || windowImage.getAttribute('src') === source) return;
+		const tube = tubes.find((name) => link.classList.contains(name)) ?? 'tube-red';
+		const next = new Image();
+		next.src = source;
+		next.decode().then(
+			() => {
+				windowImage.src = source;
+				windowCaption.textContent = link.querySelector('.district-name')?.textContent ?? '';
+				windowCaption.className = `tube tube--${tube.slice(5)}`;
+				windowImage.parentElement?.style.setProperty('--tube', `var(--${tube})`);
+			},
+			() => undefined,
+		);
+	}
+
+	for (const link of links) {
+		link.addEventListener('pointerenter', () => light(link));
+		link.addEventListener('focus', () => light(link));
+	}
+
+	// Touch screens have no hover: the name crossing the middle of the screen lights up.
+	if (matchMedia('(hover: none)').matches) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					entry.target.classList.toggle('is-lit', entry.isIntersecting);
+				}
+			},
+			{ rootMargin: '-49% 0px -49% 0px' },
+		);
+		links.forEach((link) => observer.observe(link));
+	}
+</script>
+
 <style>
 	main {
+		position: relative;
 		max-width: var(--shell-width);
 		margin-inline: auto;
 		padding: 0 var(--page-gutter) clamp(5rem, 10vw, 9rem);
 	}
 
-	.homepage-hero {
+	/*
+	 * First viewport: the sign on the harbour photo, then intro and meters on
+	 * the bare wall. Only the large lit sign ever sits on the photograph.
+	 */
+	.opening {
+		display: flex;
+		min-height: calc(100svh - 4.5rem);
+		flex-direction: column;
+	}
+
+	.sign {
 		position: relative;
-		margin-inline: calc(-1 * var(--page-gutter));
-		border-bottom: 1px solid var(--color-rule);
-	}
-
-	.homepage-hero img {
-		display: block;
-		width: 100%;
-		height: clamp(20rem, 61vw, 52rem);
-		object-fit: cover;
-		object-position: center;
-	}
-
-	@media (min-width: 48.0625rem) {
-		.homepage-hero img {
-			height: clamp(32rem, 72svh, 46rem);
-		}
-	}
-
-	.hero-title {
+		isolation: isolate;
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) auto;
-		align-items: end;
-		gap: 1rem 3rem;
-		padding: clamp(1.25rem, 4vw, 3.5rem) var(--page-gutter);
-		background: var(--color-canvas);
+		flex: 1;
+		align-content: end;
+		padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem);
 	}
 
 	h1 {
-		max-width: 11ch;
-		font-size: clamp(3.4rem, 9vw, 6rem);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 0.26em;
+		font-size: clamp(4.6rem, 11.5vw, 10.5rem);
+		line-height: 0.95;
+		letter-spacing: 0;
 	}
 
-	.hero-title p {
-		max-width: 18rem;
-		margin: 0 0 0.35rem;
-		color: var(--color-muted);
-		font-size: clamp(1rem, 1.5vw, 1.25rem);
-		font-style: italic;
-		line-height: 1.35;
+	.motto {
+		margin: 0.75rem 0 0;
+		font-size: clamp(1.4rem, 3vw, 2.4rem);
+		line-height: 1.2;
 	}
 
-	.project-intro {
+	.sign-backdrop {
+		position: absolute;
+		inset: -4.5rem calc(50% - 50vw) 0;
+		z-index: -1;
+		overflow: hidden;
+	}
+
+	/* Stronger veil under the header, lighter behind the sign, solid wall at the foot. */
+	.sign-backdrop::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to bottom,
+			color-mix(in oklch, var(--color-wall) 85%, transparent) 0,
+			color-mix(in oklch, var(--color-wall) 66%, transparent) 5rem,
+			color-mix(in oklch, var(--color-wall) 70%, transparent) 70%,
+			var(--color-wall)
+		);
+	}
+
+	:global([data-theme='dark']) .sign-backdrop::after {
+		background: linear-gradient(
+			to bottom,
+			color-mix(in oklch, var(--color-wall) 80%, transparent) 0,
+			color-mix(in oklch, var(--color-wall) 30%, transparent) 5rem,
+			color-mix(in oklch, var(--color-wall) 45%, transparent) 70%,
+			var(--color-wall)
+		);
+	}
+
+	.sign-backdrop img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 40%;
+		filter: saturate(0.75);
+	}
+
+	:global([data-theme='dark']) .sign-backdrop img {
+		filter: brightness(0.5) saturate(0.85);
+	}
+
+	.ledger {
 		display: grid;
-		grid-template-columns: minmax(12rem, 0.75fr) minmax(18rem, 1.25fr);
-		gap: clamp(2rem, 8vw, 8rem);
-		max-width: 78rem;
-		margin: clamp(5rem, 11vw, 10rem) auto;
-		padding-inline: clamp(0rem, 4vw, 4rem);
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		gap: 2rem clamp(2.5rem, 6vw, 6rem);
+		padding-block: 0 clamp(3rem, 6vw, 5rem);
 	}
 
-	.project-intro h2,
-	.walk-record h2,
-	.districts h2 {
-		font-size: clamp(2.25rem, 5vw, 4.5rem);
+	h2 {
+		font-size: clamp(1.25rem, 2vw, 1.5rem);
 	}
 
 	.intro-copy {
 		max-width: 54ch;
-		font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-		line-height: 1.65;
+		margin-top: 0.9rem;
+		color: var(--color-ink);
 	}
 
-	.intro-copy p:first-child {
-		margin-top: 0;
+	.intro-copy p {
+		margin: 0 0 1rem;
 	}
 
-	.walk-record {
-		display: grid;
-		grid-template-columns: minmax(0, 1.65fr) minmax(18rem, 0.75fr);
-		align-items: stretch;
-		border-block: 1px solid var(--color-rule);
-	}
-
-	.map-field {
-		min-height: 28rem;
-		background: var(--color-photo-frame);
-	}
-
-	.map-field img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		filter: grayscale(1) contrast(1.02);
-	}
-
-	:global([data-theme='dark']) .map-field img {
-		filter: grayscale(0.2) invert(0.82) hue-rotate(25deg) brightness(0.7) contrast(1.5);
-	}
-
-	.ledger {
-		padding: clamp(2rem, 5vw, 4.5rem);
-		background: var(--color-surface);
-	}
-
-	.ledger > p {
-		margin: 1rem 0 2.5rem;
+	.walk-record > p {
+		margin: 0.4rem 0 0.75rem;
 		color: var(--color-muted);
 	}
 
-	.statistics {
+	.meters {
 		margin: 0;
 	}
 
-	.statistics div {
-		display: grid;
-		grid-template-columns: 1fr auto;
+	.meters div {
+		display: flex;
+		justify-content: space-between;
 		align-items: baseline;
 		gap: 1rem;
-		border-top: 1px solid var(--color-rule);
-		padding-block: 1rem;
+		padding-block: 0.6rem;
+		border-bottom: 1px solid var(--color-glass);
 	}
 
-	.statistics dd {
+	.meters dt {
+		color: var(--color-muted);
+		font-weight: 500;
+	}
+
+	.meters dd {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
 		margin: 0;
-		font-size: clamp(1.6rem, 3vw, 2.6rem);
+	}
+
+	.meters strong {
+		font-size: clamp(2.2rem, 4vw, 3.2rem);
+		line-height: 1;
 		font-variant-numeric: tabular-nums;
 	}
 
-	.statistics dd strong {
-		font-weight: 620;
-	}
-
-	.statistics dd span {
-		font-size: var(--text-caption);
-		font-weight: 400;
-	}
-
-	.statistics dt {
+	.meters dd span {
 		color: var(--color-muted);
-		font-size: var(--text-secondary);
+		font-size: var(--text-meta);
 	}
 
+	/* The header repeats the sign here; let the sign carry the name. */
+	:global(.site-tagline) {
+		display: none;
+	}
+
+	/* District atlas: a wall of tube names. */
 	.districts {
-		max-width: 80rem;
-		margin: clamp(6rem, 12vw, 11rem) auto 0;
-	}
-
-	.districts-heading {
-		display: flex;
-		align-items: end;
-		justify-content: space-between;
-		gap: 1rem 3rem;
-		margin-bottom: clamp(2rem, 5vw, 4rem);
+		padding-top: clamp(3rem, 7vw, 5.5rem);
+		border-top: 1px solid var(--color-glass);
 	}
 
 	.districts-heading p {
-		max-width: 18rem;
-		margin: 0 0 0.4rem;
+		margin: 0.5rem 0 clamp(1.5rem, 4vw, 2.5rem);
 		color: var(--color-muted);
+	}
+
+	.atlas {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(2rem, 4vw, 4rem);
+		align-items: start;
 	}
 
 	.district-index {
 		margin: 0;
 		padding: 0;
-		border-bottom: 1px solid var(--color-rule);
 	}
 
-	@media (max-width: 48rem) {
-		.hero-title,
-		.project-intro,
-		.walk-record {
-			grid-template-columns: 1fr;
+	.atlas-window {
+		display: none;
+	}
+
+	/* Pointer screens: the lit name drives a photo window that stays in view. */
+	@media (hover: hover) and (min-width: 56.0625rem) {
+		.atlas {
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
 		}
 
-		.hero-title p {
-			max-width: none;
+		.atlas-window {
+			position: sticky;
+			top: 2rem;
+			display: block;
+			margin: 0;
 		}
 
-		.project-intro {
-			gap: 2rem;
-			padding-inline: 0;
+		.atlas-window img {
+			display: block;
+			width: 100%;
+			height: auto;
+			aspect-ratio: 4 / 5;
+			object-fit: cover;
 		}
 
-		.walk-record {
-			margin-inline: calc(-1 * var(--page-gutter));
+		.atlas-window {
+			--tube: var(--tube-red);
 		}
 
-		.map-field {
-			min-height: 22rem;
+		:global([data-theme='dark']) .atlas-window img {
+			box-shadow:
+				0 0 0 1px oklch(from var(--tube) l c h / 0.6),
+				0 0 3rem oklch(from var(--tube) l c h / 0.28),
+				0 30px 60px -30px oklch(0% 0 0 / 0.85);
+			transition: box-shadow 200ms steps(2, end);
 		}
 
-		.districts-heading {
-			align-items: start;
-			flex-direction: column;
+		.atlas-window figcaption {
+			margin-top: 0.75rem;
+			font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+			line-height: 1.1;
+		}
+	}
+
+	@media (hover: none) {
+		.pointer-hint {
+			display: none;
+		}
+	}
+
+	.unlit {
+		margin-top: clamp(3rem, 6vw, 5rem);
+	}
+
+	.unlit p {
+		margin: 0 0 1rem;
+		color: var(--color-muted);
+	}
+
+	.unlit ol {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.unlit li {
+		width: 2.6rem;
+		height: 0.55rem;
+		border: 1.5px solid var(--color-unlit);
+		border-radius: 1rem;
+	}
+
+	@media (max-width: 56rem) {
+		.ledger {
+			grid-template-columns: minmax(0, 1fr);
 		}
 	}
 </style>

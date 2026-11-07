@@ -5,11 +5,48 @@ import { describe, expect, it } from 'vitest';
 const root = resolve(import.meta.dirname, '../..');
 const source = (path: string) => readFileSync(resolve(root, path), 'utf8');
 
-describe('field-journal interaction contracts', () => {
-	it('keeps route-choice metadata available on narrow district rows', () => {
+describe('Kiez Neon interaction contracts', () => {
+	it('keeps route-choice metadata visible on every district row', () => {
 		const card = source('src/components/DistrictCard.astro');
 		expect(card).toContain('class="district-log"');
 		expect(card).not.toMatch(/\.district-log\s*\{[^}]*display:\s*none/s);
+	});
+
+	it('lights district names on hover, keyboard focus, and touch scrolling alike', () => {
+		const card = source('src/components/DistrictCard.astro');
+		expect(card).toContain('.district-card a:hover .district-name');
+		expect(card).toContain('.district-card a:focus-visible .district-name');
+		expect(card).toContain('.district-card a.is-lit .district-name');
+		expect(source('src/pages/index.astro')).toContain("matchMedia('(hover: none)')");
+	});
+
+	it('limits the sign palette to three tube colours in both themes', () => {
+		const css = source('src/styles/global.css');
+		for (const tube of ['--tube-red', '--tube-blue', '--tube-white']) {
+			expect(css.match(new RegExp(`${tube}:`, 'g'))).toHaveLength(2);
+		}
+		expect(css).not.toMatch(/--tube-(?!red|blue|white|glow)[a-z]+:/);
+	});
+
+	it('keeps small text off photographs so contrast never depends on the image', () => {
+		const district = source('src/pages/[slug].astro');
+		expect(district.indexOf('class="breadcrumbs"')).toBeLessThan(
+			district.indexOf('class="district-masthead"'),
+		);
+		expect(district).toMatch(/\.district-title\s*\{[^}]*background:\s*linear-gradient/s);
+		const home = source('src/pages/index.astro');
+		const sign = home.slice(
+			home.indexOf('<section class="sign"'),
+			home.indexOf('<div class="ledger">'),
+		);
+		const ledger = home.slice(
+			home.indexOf('<div class="ledger">'),
+			home.indexOf('<section class="districts"'),
+		);
+		expect(sign).toContain('class="sign-backdrop"');
+		expect(sign).not.toContain('class="intro-copy"');
+		expect(ledger).not.toContain('<img');
+		expect(home).toMatch(/\.sign-backdrop::after\s*\{[^}]*var\(--color-wall\)\s*\)/s);
 	});
 
 	it('provides long district galleries with accessible recovery links', () => {
@@ -32,54 +69,37 @@ describe('field-journal interaction contracts', () => {
 		);
 	});
 
-	it('uses the chart-canvas and night-water colors in install metadata', () => {
+	it('uses the night wall colour in install metadata', () => {
 		const astroConfig = source('astro.config.mjs');
-		expect(astroConfig).toContain("background_color: '#f3f7fa'");
-		expect(astroConfig).toContain("theme_color: '#030f18'");
+		expect(astroConfig).toContain("background_color: '#06070f'");
+		expect(astroConfig).toContain("theme_color: '#06070f'");
 	});
 
-	it('lets semantic font weights control Secuela and preloads the critical face', () => {
-		expect(source('src/styles/global.css')).not.toContain('font-variation-settings');
-		expect(source('src/layouts/BaseLayout.astro')).toContain(
-			'href="/assets/fonts/secuela-regular-vf.woff2"',
+	it('self-hosts and preloads both typefaces', () => {
+		const layout = source('src/layouts/BaseLayout.astro');
+		expect(layout).toContain('href="/assets/fonts/schibsted-grotesk-vf.woff2"');
+		expect(layout).toContain('href="/assets/fonts/tilt-neon.woff2"');
+		expect(source('src/styles/global.css')).not.toContain('fonts.googleapis.com');
+	});
+
+	it('keeps long-form prose at the intentional measure', () => {
+		expect(source('src/styles/global.css')).toContain('--reading-width: 62ch');
+		expect(source('src/pages/[slug].astro')).toMatch(
+			/\.district-content :global\(p\)\s*\{[^}]*max-width:\s*var\(--reading-width\)/s,
 		);
-	});
-
-	it('keeps condensed long-form prose at the intentional measure', () => {
-		expect(source('src/styles/global.css')).toContain('--reading-width: 60ch');
 		expect(source('src/pages/index.astro')).toContain('max-width: 54ch');
 	});
 
-	it('aligns district mastheads to the outer shell without breaking names mid-word', () => {
+	it('keeps district names whole', () => {
 		const district = source('src/pages/[slug].astro');
-		expect(district).toContain('width: calc(100% + var(--page-gutter) + var(--page-gutter))');
-		expect(district).toContain('margin-inline: calc(-1 * var(--page-gutter))');
 		expect(district).toContain("titleLength >= 14 ? 'extra-long'");
 		expect(district).toContain('overflow-wrap: normal');
 		expect(district).not.toContain('overflow-wrap: anywhere');
 	});
 
-	it('aligns the district reading column with the masthead divider', () => {
-		const district = source('src/pages/[slug].astro');
-		expect(district).toContain('--district-columns: minmax(22rem, 0.9fr) minmax(0, 1.7fr)');
-		expect(district).toMatch(/\.district-masthead\s*\{[^}]*var\(--district-columns\)/s);
-		expect(district).toMatch(/\.district-reading-grid\s*\{[^}]*var\(--district-columns\)/s);
-		expect(district).toMatch(/\.district-reading-column\s*\{[^}]*grid-column:\s*2/s);
-		expect(district).toMatch(/\.district-reading-column\s*\{[^}]*width:\s*100%/s);
-		expect(district).toMatch(
-			/\.district-content :global\(p\)\s*\{[^}]*max-width:\s*var\(--reading-width\)/s,
-		);
-	});
-
-	it('centers wide district media against the outer grid container', () => {
-		const district = source('src/pages/[slug].astro');
-		expect(district).toMatch(/\.district-reading-grid\s*\{[^}]*container-type:\s*inline-size/s);
-		expect(district).toContain('left: calc(50cqw - max(22rem, 34.615cqw))');
-	});
-
 	it('keeps imprint acknowledgements visibly marked as a list', () => {
 		const imprint = source('src/pages/imprint.astro');
 		expect(imprint).toMatch(/ul\s*\{[^}]*list-style:\s*disc outside/s);
-		expect(imprint).toMatch(/li::marker\s*\{[^}]*color:\s*var\(--color-buoy\)/s);
+		expect(imprint).toMatch(/li::marker\s*\{[^}]*color:\s*var\(--tube-red\)/s);
 	});
 });

@@ -47,7 +47,8 @@ const serviceWorkerRegistration = `
 		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content={siteConfig.author} />
 		<meta name="description" content={description} />
-		<meta name="theme-color" content="#030f18" />
+		<meta name="theme-color" content="#f1f1f5" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#06070f" media="(prefers-color-scheme: dark)" />
 		{robots && <meta name="robots" content={robots} />}
 		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 		<meta property="og:type" content={ogType} />
@@ -76,7 +77,14 @@ const serviceWorkerRegistration = `
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<link
 			rel="preload"
-			href="/assets/fonts/secuela-regular-vf.woff2"
+			href="/assets/fonts/schibsted-grotesk-vf.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="/assets/fonts/tilt-neon.woff2"
 			as="font"
 			type="font/woff2"
 			crossorigin="anonymous"
@@ -123,10 +131,10 @@ const serviceWorkerRegistration = `
 		display: inline-flex;
 		align-items: center;
 		background: var(--color-ink);
-		color: var(--color-canvas);
-		font-weight: 650;
+		color: var(--color-wall);
+		font-weight: 700;
 		text-decoration: none;
-		border: 1px solid var(--color-canvas);
+		border: 1px solid var(--color-wall);
 		padding: 0.75rem 1rem;
 	}
 

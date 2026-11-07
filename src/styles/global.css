@@ -6,57 +6,74 @@
 @source '../styles';
 
 @font-face {
-	font-family: 'Secuela';
-	src: url('/assets/fonts/secuela-regular-vf.woff2') format('woff2-variations');
+	font-family: 'Schibsted Grotesk';
+	src: url('/assets/fonts/schibsted-grotesk-vf.woff2') format('woff2-variations');
 	font-style: normal;
-	font-weight: 100 900;
+	font-weight: 400 900;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Secuela';
-	src: url('/assets/fonts/secuela-italic-vf.woff2') format('woff2-variations');
+	font-family: 'Schibsted Grotesk';
+	src: url('/assets/fonts/schibsted-grotesk-italic-vf.woff2') format('woff2-variations');
 	font-style: italic;
-	font-weight: 100 900;
+	font-weight: 400 900;
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Tilt Neon';
+	src: url('/assets/fonts/tilt-neon.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+/*
+ * Kiez Neon. Day (light) is the sign by daylight: coloured glass on a pale
+ * wall, tubes off. Night (dark) is the same sign switched on.
+ */
 :root {
 	color-scheme: light;
-	--color-canvas: oklch(97.5% 0.006 235);
-	--color-surface: oklch(93.5% 0.012 235);
-	--color-ink: oklch(22% 0.035 240);
-	--color-muted: oklch(43% 0.028 238);
-	--color-rule: oklch(76% 0.02 235);
-	--color-tide: oklch(38% 0.105 235);
-	--color-tide-hover: oklch(30% 0.095 235);
-	--color-buoy: oklch(47% 0.16 30);
-	--color-photo-frame: oklch(17% 0.025 240);
-	--font-body: 'Secuela', 'Arial Narrow', 'Aptos Narrow', 'Roboto Condensed', sans-serif;
+	--color-wall: oklch(95.5% 0.005 275);
+	--color-wall-raised: oklch(92% 0.007 275);
+	--color-ink: oklch(20% 0.02 275);
+	--color-muted: oklch(45% 0.02 275);
+	--color-glass: oklch(80% 0.01 275);
+	--color-unlit: oklch(56% 0.015 275);
+	--unlit-l: 0.56;
+	--color-focus: oklch(52% 0.22 25);
+	--tube-red: oklch(52% 0.22 25);
+	--tube-blue: oklch(48% 0.16 250);
+	--tube-white: oklch(52% 0.14 62);
+	--font-body: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+	--font-neon: 'Tilt Neon', 'Arial Rounded MT Bold', 'Helvetica Rounded', sans-serif;
 	--text-caption: 0.8rem;
 	--text-meta: 0.875rem;
 	--text-secondary: 0.9rem;
 	--page-gutter: clamp(1.125rem, 4vw, 3rem);
 	--shell-width: 92rem;
-	--reading-width: 60ch;
+	--reading-width: 62ch;
 	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 	font-family: var(--font-body);
 	font-synthesis: none;
-	background: var(--color-canvas);
+	background: var(--color-wall);
 	color: var(--color-ink);
 }
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
-	--color-canvas: oklch(16% 0.028 240);
-	--color-surface: oklch(21.5% 0.035 240);
-	--color-ink: oklch(94% 0.008 235);
-	--color-muted: oklch(74% 0.022 235);
-	--color-rule: oklch(39% 0.035 238);
-	--color-tide: oklch(79% 0.09 225);
-	--color-tide-hover: oklch(88% 0.07 220);
-	--color-buoy: oklch(72% 0.15 30);
-	--color-photo-frame: oklch(10% 0.02 240);
+	--color-wall: oklch(13% 0.02 275);
+	--color-wall-raised: oklch(17% 0.02 275);
+	--color-ink: oklch(91% 0.01 275);
+	--color-muted: oklch(72% 0.02 275);
+	--color-glass: oklch(34% 0.015 275);
+	--color-unlit: oklch(58% 0.015 275);
+	--unlit-l: 0.58;
+	--color-focus: oklch(93% 0.07 88);
+	--tube-red: oklch(66% 0.25 22);
+	--tube-blue: oklch(72% 0.16 245);
+	--tube-white: oklch(93% 0.07 88);
 }
 
 *,
@@ -67,15 +84,17 @@
 
 html {
 	min-width: 20rem;
-	background: var(--color-canvas);
+	background: var(--color-wall);
 	scroll-behavior: smooth;
 	text-size-adjust: 100%;
+	scrollbar-color: var(--color-glass) var(--color-wall);
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
-	background: var(--color-canvas);
+	overflow-x: clip;
+	background: var(--color-wall);
 	color: var(--color-ink);
 	font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
 	line-height: 1.65;
@@ -90,9 +109,9 @@ h1,
 h2,
 h3 {
 	margin-block: 0;
-	font-weight: 650;
+	font-weight: 700;
 	line-height: 1.02;
-	letter-spacing: -0.025em;
+	letter-spacing: -0.02em;
 	text-wrap: balance;
 }
 
@@ -102,17 +121,16 @@ li {
 }
 
 a {
-	color: var(--color-tide);
-	text-decoration-color: color-mix(in oklch, currentColor 55%, transparent);
+	color: inherit;
+	text-decoration-color: color-mix(in oklch, currentColor 45%, transparent);
 	text-decoration-thickness: 0.075em;
-	text-underline-offset: 0.18em;
+	text-underline-offset: 0.2em;
 	transition:
 		color 160ms var(--ease-out),
 		text-decoration-color 160ms var(--ease-out);
 }
 
 a:hover {
-	color: var(--color-tide-hover);
 	text-decoration-color: currentColor;
 }
 
@@ -126,12 +144,12 @@ iframe {
 }
 
 ::selection {
-	background: var(--color-tide);
-	color: var(--color-canvas);
+	background: var(--tube-red);
+	color: var(--color-wall);
 }
 
 :focus-visible {
-	outline: 0.1875rem solid var(--color-buoy);
+	outline: 0.1875rem solid var(--color-focus);
 	outline-offset: 0.25rem;
 }
 
@@ -140,23 +158,72 @@ iframe {
 	scroll-margin-top: 5rem;
 }
 
-body > main,
-body > header,
-body > footer {
-	animation: journal-arrival 220ms var(--ease-out) both;
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
 }
 
-body > main {
-	animation-delay: 35ms;
+/*
+ * Tube lettering. By day the glass shows its colour; at night it is a pale
+ * core inside two layers of glow. Set --tube to pick the gas.
+ */
+.tube {
+	--tube: var(--tube-red);
+	color: var(--tube);
+	font-family: var(--font-neon);
+	font-weight: 400;
+	letter-spacing: 0;
 }
 
-body > footer {
-	animation-delay: 70ms;
+.tube--blue {
+	--tube: var(--tube-blue);
 }
 
-@keyframes journal-arrival {
-	from {
-		transform: translateY(0.35rem);
+.tube--white {
+	--tube: var(--tube-white);
+}
+
+:root[data-theme='dark'] .tube,
+:root[data-theme='dark'] .tube-lit {
+	--tube-glow:
+		0 0 0.04em var(--tube), 0 0 0.18em var(--tube),
+		0 0 0.6em oklch(from var(--tube) l c h / 0.55),
+		0 0 1.4em oklch(from var(--tube) l c h / 0.35);
+	color: oklch(from var(--tube) calc(l + 0.2) calc(c * 0.5) h);
+	text-shadow: var(--tube-glow);
+}
+
+/*
+ * The sign stutters on once when the page arrives. Only the glow flickers;
+ * the letters keep full contrast throughout, and by day nothing moves.
+ */
+.ignite {
+	animation: ignite 1.3s steps(1, end) 150ms both;
+}
+
+@keyframes ignite {
+	0% {
+		text-shadow: none;
+	}
+	14% {
+		text-shadow: var(--tube-glow, none);
+	}
+	19% {
+		text-shadow: none;
+	}
+	32% {
+		text-shadow: var(--tube-glow, none);
+	}
+	36% {
+		text-shadow: none;
+	}
+	46%,
+	100% {
+		text-shadow: var(--tube-glow, none);
 	}
 }
 
@@ -175,27 +242,31 @@ body > footer {
 }
 
 @media print {
-	:root {
-		--color-canvas: white;
+	:root,
+	:root[data-theme='dark'] {
+		--color-wall: white;
 		--color-ink: black;
 		--color-muted: #333;
-		--color-rule: #999;
+		--color-glass: #999;
+	}
+
+	.tube,
+	:root[data-theme='dark'] .tube {
+		color: black;
+		text-shadow: none;
 	}
 
 	.site-header,
 	.site-footer,
 	.theme-toggle,
 	.district-navigation,
+	.walk-backdrop,
 	.embed iframe {
 		display: none !important;
 	}
 
 	body {
 		font-size: 11pt;
-	}
-
-	a {
-		color: inherit;
 	}
 
 	img {

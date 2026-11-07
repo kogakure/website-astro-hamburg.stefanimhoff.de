@@ -32,8 +32,8 @@ export default defineConfig({
 			],
 			start_url: '/',
 			display: 'standalone',
-			background_color: '#f3f7fa',
-			theme_color: '#030f18',
+			background_color: '#06070f',
+			theme_color: '#06070f',
 		}),
 		serviceWorker({
 			registration: {

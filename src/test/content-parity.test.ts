@@ -95,9 +95,9 @@ describe('migrated content parity', () => {
 		]);
 		expect(
 			files.filter((file) => imageExtensions.has(extname(file).toLowerCase())),
-		).toHaveLength(917);
-		// Secuela (4 files, no longer loaded) plus Schibsted Grotesk and Tilt Neon.
-		expect(files.filter((file) => /\.woff2?$/.test(file))).toHaveLength(7);
+		).toHaveLength(913);
+		// Schibsted Grotesk (regular and italic) and Tilt Neon.
+		expect(files.filter((file) => /\.woff2?$/.test(file))).toHaveLength(3);
 		for (const file of [
 			'favicon.ico',
 			'googleeac4fc886a6f9f8d.html',

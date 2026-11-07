@@ -38,6 +38,7 @@ export default [
 			'.codegraph/',
 			'.claude/',
 			'.codex/',
+			'_prototypes/',
 			'dist/',
 			'node_modules/',
 			'playwright-report/',

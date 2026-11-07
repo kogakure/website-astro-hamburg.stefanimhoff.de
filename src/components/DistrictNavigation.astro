@@ -14,7 +14,7 @@ const { previous, next } = Astro.props;
 		previous ? (
 			<a class="previous" href={`/${previous.id}/`} rel="prev">
 				<span>Previous walk</span>
-				<strong>← {previous.data.title}</strong>
+				<strong>{previous.data.title}</strong>
 			</a>
 		) : (
 			<span aria-hidden="true" />
@@ -24,7 +24,7 @@ const { previous, next } = Astro.props;
 		next && (
 			<a class="next" href={`/${next.id}/`} rel="next">
 				<span>Next walk</span>
-				<strong>{next.data.title} →</strong>
+				<strong>{next.data.title}</strong>
 			</a>
 		)
 	}
@@ -35,9 +35,7 @@ const { previous, next } = Astro.props;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: clamp(1rem, 4vw, 3rem);
-		margin-top: clamp(4rem, 10vw, 8rem);
-		padding-top: 1.25rem;
-		border-top: 1px solid var(--color-rule);
+		margin-top: clamp(3rem, 7vw, 5rem);
 	}
 
 	.district-navigation a {
@@ -49,18 +47,35 @@ const { previous, next } = Astro.props;
 		text-decoration: none;
 	}
 
-	.district-navigation a:hover strong {
-		color: var(--color-tide);
-	}
-
 	.district-navigation span {
 		color: var(--color-muted);
-		font-size: var(--text-caption);
+		font-size: var(--text-meta);
 	}
 
 	.district-navigation strong {
-		font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-		font-weight: 620;
+		--tube: var(--tube-white);
+		color: var(--color-unlit);
+		color: oklch(from var(--tube) var(--unlit-l) 0.03 h);
+		font-family: var(--font-neon);
+		font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+		font-weight: 400;
+		line-height: 1.1;
+		transition:
+			color 120ms steps(2, end),
+			text-shadow 120ms steps(2, end);
+	}
+
+	.district-navigation a:hover strong,
+	.district-navigation a:focus-visible strong {
+		color: var(--tube);
+	}
+
+	:global([data-theme='dark']) .district-navigation a:hover strong,
+	:global([data-theme='dark']) .district-navigation a:focus-visible strong {
+		color: oklch(from var(--tube) calc(l + 0.05) calc(c * 0.5) h);
+		text-shadow:
+			0 0 0.18em var(--tube),
+			0 0 0.6em oklch(from var(--tube) l c h / 0.5);
 	}
 
 	.district-navigation .next {

@@ -14,15 +14,16 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <style>
 	.site-header {
+		position: relative;
+		z-index: 2;
 		display: flex;
 		max-width: var(--shell-width);
-		min-height: 5rem;
+		min-height: 4.5rem;
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
 		margin-inline: auto;
 		padding: 0.75rem var(--page-gutter);
-		border-bottom: 1px solid var(--color-rule);
 	}
 
 	.site-identity {
@@ -36,14 +37,17 @@ import ThemeToggle from './ThemeToggle.astro';
 
 	.site-title {
 		font-size: 1.05rem;
-		font-weight: 720;
-		letter-spacing: -0.015em;
+		font-weight: 750;
+		letter-spacing: -0.01em;
 	}
 
 	.site-tagline {
 		color: var(--color-muted);
 		font-size: var(--text-caption);
-		font-style: italic;
+	}
+
+	.site-identity:hover .site-title {
+		color: var(--tube-red);
 	}
 
 	@media (max-width: 34rem) {
